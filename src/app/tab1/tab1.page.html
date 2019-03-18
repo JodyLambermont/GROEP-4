@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    
+<br>
+<br>
+          
+          <h1 style="text-align: center">Enter your timecard</h1>
+      
+      <br>
+      <br>
+      <br>
+      <br>
+    <ion-list class="centerList">
+      <ion-item lines="none">
+        <ion-label position="stacked">Startuur</ion-label>
+        <ion-input type="Time"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+          <ion-label position="stacked">Einduur</ion-label>
+          <ion-input type="Time"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+          <ion-label position="stacked">Datum</ion-label>
+          <ion-input type="Date"></ion-input>
+      </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Overuren</ion-label>
+      <ion-checkbox></ion-checkbox>
+      </ion-item>
+      </ion-list>
+      <br>
+      <br>
+      
+      <ion-fab horizontal="center">
+        <ion-fab-button (click)="presentToastWithOptions()">Send</ion-fab-button>
+      </ion-fab>
+    
+      
+
+
+
+</ion-content>
