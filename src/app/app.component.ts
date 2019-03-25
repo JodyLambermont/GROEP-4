@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { MenuController } from '@ionic/angular';
+import { Component } from "@angular/core";
+import { NavController } from "@ionic/angular";
+import { Platform } from "@ionic/angular";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { MenuController } from "@ionic/angular";
+import * as firebase from "firebase/app";
+import { firebaseConfig } from "./credentials";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html'
+  selector: "app-root",
+  templateUrl: "app.component.html"
 })
 export class AppComponent {
   constructor(
@@ -15,25 +17,26 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public navCtrl: NavController,
-    public menuCtrl: MenuController,
+    public menuCtrl: MenuController
   ) {
     this.initializeApp();
   }
 
-  goProfile(){
-    this.navCtrl.navigateForward('/profile');
+  goProfile() {
+    this.navCtrl.navigateForward("/profile");
     this.menuCtrl.close();
   }
-  goAdmin(){
-    this.navCtrl.navigateForward('/admin');
+  goAdmin() {
+    this.navCtrl.navigateForward("/admin");
     this.menuCtrl.close();
   }
-  goSettings(){
-    this.navCtrl.navigateForward('/settings');
+  goSettings() {
+    this.navCtrl.navigateForward("/settings");
     this.menuCtrl.close();
   }
 
   initializeApp() {
+    firebase.initializeApp(firebaseConfig);
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

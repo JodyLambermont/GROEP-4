@@ -1,7 +1,8 @@
 {
   "name": "timesheetApp",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }
