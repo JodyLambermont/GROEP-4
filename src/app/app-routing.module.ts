@@ -1,34 +1,24 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
-import { AuthGuard } from "./services/user/auth.guard";
 
 const routes: Routes = [
   {
     path: "",
-    loadChildren: "./tabs/tabs.module#TabsPageModule",
-    canActivate: [AuthGuard]
+    loadChildren: "./tabs/tabs.module#TabsPageModule"
   },
   {
     path: "profile",
-    loadChildren: "./profile/profile.module#ProfilePageModule",
-    canActivate: [AuthGuard]
+    loadChildren: "./profile/profile.module#ProfilePageModule"
   },
   {
     path: "admin",
-    loadChildren: "./admin/admin.module#AdminPageModule",
-    canActivate: [AuthGuard]
+    loadChildren: "./admin/admin.module#AdminPageModule"
   },
   {
     path: "settings",
-    loadChildren: "./settings/settings.module#SettingsPageModule",
-    canActivate: [AuthGuard]
+    loadChildren: "./settings/settings.module#SettingsPageModule"
   },
   { path: "login", loadChildren: "./pages/login/login.module#LoginPageModule" },
-  {
-    path: "profile",
-    loadChildren: "./pages/profile/profile.module#ProfilePageModule",
-    canActivate: [AuthGuard]
-  },
   {
     path: "reset-password",
     loadChildren:
