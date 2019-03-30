@@ -37,7 +37,8 @@ const routes: Routes = [
   {
     path: "signup",
     loadChildren: "./pages/signup/signup.module#SignupPageModule"
-  },  { path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule' }
+  },
+  { path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule' }
 
 ];
 @NgModule({
