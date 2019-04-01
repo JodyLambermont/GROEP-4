@@ -28,8 +28,14 @@ const routes: Routes = [
     path: "signup",
     loadChildren: "./pages/signup/signup.module#SignupPageModule"
   },
-  { path: 'task-entry', loadChildren: './pages/task-entry/task-entry.module#TaskEntryPageModule' }
-
+  {
+    path: "task-entry",
+    loadChildren: "./pages/task-entry/task-entry.module#TaskEntryPageModule"
+  },
+  {
+    path: "calendar",
+    loadChildren: ".pages/calendar/calendar.module#CalendarPageModule"
+  }
 ];
 @NgModule({
   imports: [
