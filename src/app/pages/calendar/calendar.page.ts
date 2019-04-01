@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, Inject,LOCALE_ID } from '@angular/core';
+import { Component, OnInit, ViewChild,Inject,LOCALE_ID } from '@angular/core';
 import{ CalendarComponent } from 'ionic2-calendar/calendar';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
-
 
 
 @Component({
@@ -31,7 +30,9 @@ export class CalendarPage implements OnInit {
 
 @ViewChild(CalendarComponent) myCal:CalendarComponent;
 
-  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string) { }
+  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string) {
+
+   }
 
 
   ngOnInit() {
@@ -72,16 +73,6 @@ export class CalendarPage implements OnInit {
       this.calendar.mode = mode;
   }
 
-  back(){
-    var swiper = document.querySelector('.swiper-container')['swiper'];
-    swiper.SlidePrev();
-  }
-
-  next(){
-    var swiper = document.querySelector('.swiper-container')['swiper'];
-    swiper.SlideNext();
-  }
-
   today(){
     this.calendar.currentDate = new Date();
   }
@@ -106,12 +97,6 @@ export class CalendarPage implements OnInit {
     this.event.startTime = selected.toISOString();
     selected.setHours(selected.getHours() + 1);
     this.event.endTime = (selected.toISOString());
-  }
-  reloadSource(){
-
-  }
-  onCurrentDateChanged(){
-
   }
 
 }
