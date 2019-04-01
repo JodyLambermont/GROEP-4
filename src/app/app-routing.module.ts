@@ -34,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: "calendar",
-    loadChildren: ".pages/calendar/calendar.module#CalendarPageModule"
+    loadChildren: "./pages/calendar/calendar.module#CalendarPageModule"
   }
 ];
 @NgModule({
