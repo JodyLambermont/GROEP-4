@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../../services/user/auth.service";
+//import { AuthService } from "../../services/user/auth.service";
 import { LoadingController, AlertController } from "@ionic/angular";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -14,7 +14,7 @@ export class SignupPage implements OnInit {
   public loading: any;
 
   constructor(
-    private authService: AuthService,
+    //private authService: AuthService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private formBuilder: FormBuilder,
@@ -41,6 +41,7 @@ export class SignupPage implements OnInit {
       const email: string = signupForm.value.email;
       const password: string = signupForm.value.password;
 
+      /*
       this.authService.signupUser(email, password).then(
         () => {
           this.loading.dismiss().then(() => {
@@ -58,7 +59,7 @@ export class SignupPage implements OnInit {
         }
       );
       this.loading = await this.loadingCtrl.create();
-      await this.loading.present();
+      await this.loading.present();*/
     }
   }
 }
