@@ -17,8 +17,20 @@ export class SettingsPage implements OnInit {
     this.navCtrl.back();
   }
 
-  public goToName(){
+  goToName(){
     this.navCtrl.navigateForward("/change-name");
+  }
+
+  goToNotifications(){
+    this.navCtrl.navigateForward("/change-notifications");
+  }
+
+  goToPassword(){
+    this.navCtrl.navigateForward("/change-password");
+  }
+
+  goToWorkweek(){
+    this.navCtrl.navigateForward("/change-workweek");
   }
 
 }

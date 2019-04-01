@@ -5,28 +5,25 @@
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Settings</ion-title>
+    <ion-title>Instellingen</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
   <ion-list>
-    <ion-label>label</ion-label>
+    <ion-label>test</ion-label>
     <ion-item>
-        <button ion-button (click)="goToName();">Pokémon Yellow</button>
+        <ion-label ion-button (click)="goToName();">Wijzig Naam</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Mega Man X</ion-label>
+      <ion-label ion-button (click)="goToPassword();">Wijzig Wachtwoord</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>The Legend of Zelda</ion-label>
+      <ion-label ion-button (click)="goToWorkweek();">Wijzig Standaard Werkweek</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Pac-Man</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Super Mario World</ion-label>
+      <ion-label ion-button (click)="goToNotifications();">Wijzig Notificaties</ion-label>
     </ion-item>
   </ion-list>
 
