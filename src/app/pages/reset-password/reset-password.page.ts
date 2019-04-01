@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../../services/user/auth.service";
+//import { AuthService } from "../../services/user/auth.service";
 import { AlertController } from "@ionic/angular";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class ResetPasswordPage implements OnInit {
   public resetPasswordForm: FormGroup;
   constructor(
-    private authService: AuthService,
+    //private authService: AuthService,
     private alertCtrl: AlertController,
     private formBuilder: FormBuilder,
     private router: Router
@@ -32,7 +32,7 @@ export class ResetPasswordPage implements OnInit {
       );
     } else {
       const email: string = resetPasswordForm.value.email;
-      this.authService.resetPassword(email).then(
+      /*this.authService.resetPassword(email).then(
         async () => {
           const alert = await this.alertCtrl.create({
             message: "Check your email for a password reset link",
@@ -55,7 +55,7 @@ export class ResetPasswordPage implements OnInit {
           });
           await errorAlert.present();
         }
-      );
+      );*/
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms"; //form validation in Angular (check docs, lots of information for forms)
 import { LoadingController, AlertController } from "@ionic/angular"; //alert popup and loading compononent in page
-import { AuthService } from "../../services/user/auth.service"; //needed login service
+//import { AuthService } from "../../services/user/auth.service"; //needed login service
 import { Router } from "@angular/router"; // redirection to home page after successful login
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
     // injecting all providers as parameters in constructor so its usable in the class
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    private authService: AuthService,
+    //private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
       const email = loginForm.value.email;
       const password = loginForm.value.password;
 
-      this.authService.loginUser(email, password).then(
+      /*this.authService.loginUser(email, password).then(
         () => {
           this.loading.dismiss().then(() => {
             this.router.navigateByUrl("home");
@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
             await alert.present();
           });
         }
-      );
+      );*/
     }
   }
 }
