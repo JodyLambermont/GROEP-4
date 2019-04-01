@@ -17,4 +17,8 @@ export class SettingsPage implements OnInit {
     this.navCtrl.back();
   }
 
+  public goToName(){
+    this.navCtrl.navigateForward("/change-name");
+  }
+
 }
