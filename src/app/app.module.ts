@@ -19,7 +19,7 @@ import { APP_ROOT } from "@angular/core/src/di/scope";
   providers: [
     BrowserModule,
     HttpClientModule,
-    //IonicModule.forRoot(myApp),
+    //IonicModule.forRoot(Trackify),
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

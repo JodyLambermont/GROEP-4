@@ -3,8 +3,12 @@
   overflow: hidden;
 }
 
-.centerList{
+.centerList {
   justify-content: center;
-    display: flex!important;
-     align-items: center!important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+#ActivityInput {
+  width: 400px;
 }
