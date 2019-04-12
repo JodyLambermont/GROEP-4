@@ -35,7 +35,24 @@ const routes: Routes = [
   {
     path: "calendar",
     loadChildren: "./pages/calendar/calendar.module#CalendarPageModule"
+  },
+  {
+    path: "change-name",
+    loadChildren: "./settings/change-name/change-name.module#ChangeNamePageModule"
+  },
+  { 
+    path: 'change-password', 
+    loadChildren: './settings/change-password/change-password.module#ChangePasswordPageModule' 
+  },
+  { 
+    path: 'change-workweek', 
+    loadChildren: './settings/change-workweek/change-workweek.module#ChangeWorkweekPageModule' 
+  },
+  { 
+    path: 'change-notifications', 
+    loadChildren: './settings/change-notifications/change-notifications.module#ChangeNotificationsPageModule' 
   }
+
 ];
 @NgModule({
   imports: [
