@@ -12,14 +12,20 @@ import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { APP_ROOT } from "@angular/core/src/di/scope";
 
+import { IonicStorageModule } from "@ionic/storage"; //store JWT token
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot() //store JWT token
+  ],
   providers: [
     BrowserModule,
     HttpClientModule,
-    //IonicModule.forRoot(Trackify),
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
