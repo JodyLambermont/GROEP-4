@@ -42,6 +42,8 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
+      //keeps sending user back to tab1 at refresh or navigation in url - how to solve?
+      //original intention was so that app keeps an eye if authenticated, not to refresh app every page and redirect back to ""
       this.authService.authenticationState.subscribe(state => {
         if (state) {
           this.router.navigate([""]);

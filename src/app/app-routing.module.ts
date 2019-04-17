@@ -4,23 +4,23 @@ import { AuthGuard } from "./guards/auth.guard";
 const routes: Routes = [
   {
     path: "",
-    loadChildren: "./tabs/tabs.module#TabsPageModule"
-    //, canActivate: [AuthGuard]
+    loadChildren: "./tabs/tabs.module#TabsPageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "profile",
-    loadChildren: "./profile/profile.module#ProfilePageModule"
-    //, canActivate: [AuthGuard]
+    loadChildren: "./profile/profile.module#ProfilePageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "admin",
-    loadChildren: "./admin/admin.module#AdminPageModule"
-    //, canActivate: [AuthGuard]
+    loadChildren: "./admin/admin.module#AdminPageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "settings",
-    loadChildren: "./settings/settings.module#SettingsPageModule"
-    //, canActivate: [AuthGuard]
+    loadChildren: "./settings/settings.module#SettingsPageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "login",
@@ -29,42 +29,42 @@ const routes: Routes = [
   {
     path: "reset-password",
     loadChildren:
-      "./pages/reset-password/reset-password.module#ResetPasswordPageModule"
-    //, canActivate: [AuthGuard]
+      "./pages/reset-password/reset-password.module#ResetPasswordPageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "signup",
-    loadChildren: "./pages/signup/signup.module#SignupPageModule"
-    //, canActivate: [AuthGuard]
+    loadChildren: "./pages/signup/signup.module#SignupPageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "calendar",
-    loadChildren: "./pages/calendar/calendar.module#CalendarPageModule"
-    //, canActivate: [AuthGuard]
+    loadChildren: "./pages/calendar/calendar.module#CalendarPageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "change-name",
     loadChildren:
-      "./settings/change-name/change-name.module#ChangeNamePageModule"
-    //, canActivate: [AuthGuard]
+      "./settings/change-name/change-name.module#ChangeNamePageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "change-password",
     loadChildren:
-      "./settings/change-password/change-password.module#ChangePasswordPageModule"
-    //, canActivate: [AuthGuard]
+      "./settings/change-password/change-password.module#ChangePasswordPageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "change-workweek",
     loadChildren:
-      "./settings/change-workweek/change-workweek.module#ChangeWorkweekPageModule"
-    //, canActivate: [AuthGuard]
+      "./settings/change-workweek/change-workweek.module#ChangeWorkweekPageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "change-notifications",
     loadChildren:
-      "./settings/change-notifications/change-notifications.module#ChangeNotificationsPageModule"
-    //, canActivate: [AuthGuard]
+      "./settings/change-notifications/change-notifications.module#ChangeNotificationsPageModule",
+    canActivate: [AuthGuard]
   }
 ];
 @NgModule({
