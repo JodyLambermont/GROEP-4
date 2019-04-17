@@ -1,42 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="loginForm">
+  <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
+
     <ion-item>
-      <ion-label position="stacked">Email</ion-label>
-      <ion-input formControlName="email" type="email" placeholder="Your email address" [class.invalid]="!loginForm.controls['email'].valid &&
-        loginForm.controls['email'].touched">
-      </ion-input>
-    </ion-item>
-    <ion-item class="error-message" *ngIf="!loginForm.controls['email'].valid &&
-         loginForm.controls['email'].touched">
-      <ion-label>Please enter a valid email address.</ion-label>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Password</ion-label>
-      <ion-input formControlName="password" type="password" placeholder="Your password" [class.invalid]="!loginForm.controls['password'].valid&& loginForm.controls['password'].touched">
-      </ion-input>
-    </ion-item>
-    <ion-item class="error-message" *ngIf="!loginForm.controls['password'].valid
-        && loginForm.controls['password'].touched">
-      <ion-label>Your password needs more than 8 characters.</ion-label>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
 
-    <ion-button (click)="loginUser(loginForm)" expand="block" [disabled]="!loginForm.valid">
-      Log In
-    </ion-button>
+    <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
+    <!--
+      Unregistered person is not allowed to register himself, implement somewhere else! (use button)
+      <ion-button expand="full" type="button" (click)="register()" [disabled]="!credentialsForm.valid">Register</ion-button>
+      -->
   </form>
-
-  <ion-button expand="block" fill="clear" routerLink="/signup">
-    Create a new account
-  </ion-button>
-
-  <ion-button expand="block" fill="clear" routerLink="/reset-password">
-    Forgot password?
-  </ion-button>
 </ion-content>

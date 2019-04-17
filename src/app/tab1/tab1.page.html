@@ -9,11 +9,14 @@
 <ion-content>
   <br>
   <br>
-  <h1 style="text-align: center">Enter your timecard</h1>
+
+  <h1 style="text-align: center">Log uw tijd</h1>
+
   <br>
   <br>
   <br>
   <br>
+
   <ion-list class="centerList">
     <ion-item lines="none">
       <ion-label position="stacked">Startuur</ion-label>
@@ -29,17 +32,21 @@
     </ion-item>
     <ion-item lines="none">
       <ion-label position="stacked">Overuren</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-    <br>
-    <ion-item>
-      <ion-label>Default Label</ion-label>
-      <ion-input></ion-input>
+      <ion-checkbox id="overurenCheckbox"></ion-checkbox>
     </ion-item>
   </ion-list>
+
+  <ion-list class="centerList">
+    <ion-item>
+      <ion-input id="ActivityInput" placeholder="Wat heeft u gedaan?"></ion-input>
+    </ion-item>
+  </ion-list>
+
   <br>
   <br>
+
   <ion-fab horizontal="center">
-    <ion-fab-button (click)="presentToastWithOptions()">Send</ion-fab-button>
+    <ion-fab-button (click)="presentToast()">Verstuur</ion-fab-button>
   </ion-fab>
+
 </ion-content>

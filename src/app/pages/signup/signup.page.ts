@@ -40,26 +40,6 @@ export class SignupPage implements OnInit {
     } else {
       const email: string = signupForm.value.email;
       const password: string = signupForm.value.password;
-
-      /*
-      this.authService.signupUser(email, password).then(
-        () => {
-          this.loading.dismiss().then(() => {
-            this.router.navigateByUrl("home");
-          });
-        },
-        error => {
-          this.loading.dismiss().then(async () => {
-            const alert = await this.alertCtrl.create({
-              message: error.message,
-              buttons: [{ text: "Ok", role: "cancel" }]
-            });
-            await alert.present();
-          });
-        }
-      );
-      this.loading = await this.loadingCtrl.create();
-      await this.loading.present();*/
     }
   }
 }
