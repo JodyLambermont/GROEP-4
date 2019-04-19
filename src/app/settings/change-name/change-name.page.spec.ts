@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskEntryPage } from './task-entry.page';
+import { ChangeNamePage } from './change-name.page';
 
-describe('TaskEntryPage', () => {
-  let component: TaskEntryPage;
-  let fixture: ComponentFixture<TaskEntryPage>;
+describe('ChangeNamePage', () => {
+  let component: ChangeNamePage;
+  let fixture: ComponentFixture<ChangeNamePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskEntryPage ],
+      declarations: [ ChangeNamePage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TaskEntryPage);
+    fixture = TestBed.createComponent(ChangeNamePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
