@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild,Inject,LOCALE_ID } from '@angular/core';
 import{ CalendarComponent } from 'ionic2-calendar/calendar';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 
 @Component({
@@ -28,10 +30,23 @@ export class CalendarPage implements OnInit {
 
   viewTitle = '';
 
+  items;
+
 @ViewChild(CalendarComponent) myCal:CalendarComponent;
-
-  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string) {
-
+  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string,private http: HttpClient) {
+    this.http.get('https://ehbpmagroup6.azurewebsites.net/log/test').subscribe((response) => {      
+      console.log(response);
+    let eventCopy = {
+        title:'test',
+        startTime:new Date(response[3]['start']),
+        endTime:new Date(response[3]['stop']),
+        desc: response[3]['description'],
+        allDay:false
+      }
+      this.eventSource.push(eventCopy);
+      this.myCal.loadEvents();
+      this.resetEvent();
+    });
    }
 
 

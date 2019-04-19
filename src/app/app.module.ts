@@ -15,7 +15,7 @@ import { APP_ROOT } from "@angular/core/src/di/scope";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule],
   providers: [
     BrowserModule,
     HttpClientModule,
