@@ -15,6 +15,7 @@ const TOKEN_KEY = "access_token";
 })
 export class AuthenticationService {
   url = environment.url;
+  APIKey = environment.APIKey;
   user = null;
   authenticationState = new BehaviorSubject(false);
 
@@ -48,7 +49,10 @@ export class AuthenticationService {
 
   register(credentials) {
     credentials = JSON.stringify(credentials);
-    var options = new HttpHeaders({ "Content-Type": "application/json" });
+    var options = new HttpHeaders({
+      "Content-Type": "application/json",
+      APIkey: this.APIKey
+    });
     return this.http
       .post(`${this.url}/auth/register`, credentials, { headers: options })
       .pipe(
@@ -61,7 +65,10 @@ export class AuthenticationService {
 
   login(credentials) {
     credentials = JSON.stringify(credentials);
-    var options = new HttpHeaders({ "Content-Type": "application/json" });
+    var options = new HttpHeaders({
+      "Content-Type": "application/json",
+      APIkey: this.APIKey
+    });
     return this.http
       .post(`${this.url}/auth/login`, credentials, { headers: options })
       .pipe(
