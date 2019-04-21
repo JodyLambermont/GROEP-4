@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url: "https://ehbpmagroup6.azurewebsites.net"
+  url: "https://ehbpmagroup6.azurewebsites.net",
+  APIKey: "pHtBjEj0Y1d1gnSbxGDAEDUQoQuvsOa3I4snAi5QoLKrHTvJMxbl1Wk5CLhQ8uu7"
 };
 
 /*
