@@ -9,6 +9,7 @@ import { AuthenticationService } from "../../services/authentication.service";
 })
 export class LoginPage implements OnInit {
   credentialsForm: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService
@@ -25,7 +26,9 @@ export class LoginPage implements OnInit {
     this.authenticationService.login(this.credentialsForm.value).subscribe();
   }
 
+  /*
   register() {
     this.authenticationService.register(this.credentialsForm.value).subscribe();
   }
+  */
 }

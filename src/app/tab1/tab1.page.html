@@ -7,46 +7,56 @@
 </ion-header>
 
 <ion-content>
-  <br>
-  <br>
-
+  <br />
+  <br />
   <h1 style="text-align: center">Log uw tijd</h1>
+  <br />
+  <br />
+  <br />
+  <br />
 
-  <br>
-  <br>
-  <br>
-  <br>
+  <form [formGroup]="logForm" (ngSubmit)="logSubmit()">
+    <ion-list class="centerList">
+      <ion-item lines="none">
+        <ion-label position="stacked">Startuur</ion-label>
+        <ion-input type="Time" formControlName="uur1"></ion-input>
+      </ion-item>
 
-  <ion-list class="centerList">
-    <ion-item lines="none">
-      <ion-label position="stacked">Startuur</ion-label>
-      <ion-input type="Time"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label position="stacked">Einduur</ion-label>
-      <ion-input type="Time"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label position="stacked">Datum</ion-label>
-      <ion-input type="Date"></ion-input>
-    </ion-item>
+      <ion-item lines="none">
+        <ion-label position="stacked">Einduur</ion-label>
+        <ion-input type="Time" formControlName="uur2"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Datum</ion-label>
+        <ion-input type="Date" formControlName="datum"></ion-input>
+      </ion-item>
+      <!--
     <ion-item lines="none">
       <ion-label position="stacked">Overuren</ion-label>
       <ion-checkbox id="overurenCheckbox"></ion-checkbox>
     </ion-item>
-  </ion-list>
+    -->
+    </ion-list>
 
-  <ion-list class="centerList">
-    <ion-item>
-      <ion-input id="ActivityInput" placeholder="Wat heeft u gedaan?"></ion-input>
-    </ion-item>
-  </ion-list>
+    <ion-list class="centerList">
+      <ion-item>
+        <ion-input id="ActivityInput" placeholder="Wat heeft u gedaan?" formControlName="description"></ion-input>
+      </ion-item>
+    </ion-list>
 
-  <br>
-  <br>
+    <ion-list class="centerList">
+      <ion-searchbar debounce="250" placeholder="Zoek een project" formControlName="project"></ion-searchbar>
 
-  <ion-fab horizontal="center">
-    <ion-fab-button (click)="presentToast()">Verstuur</ion-fab-button>
-  </ion-fab>
-
+      <ion-searchbar debounce="250" placeholder="Zoek een activiteit" formControlName="activiteit"></ion-searchbar>
+    </ion-list>
+    <br />
+    <br />
+    <!--
+    <ion-fab horizontal="center">
+      <ion-fab-button type="submit" [disabled]="!logForm.valid">Verstuur </ion-fab-button>
+    </ion-fab>
+    -->
+    <ion-button expand="full" type="submit">Verstuur</ion-button>
+  </form>
 </ion-content>

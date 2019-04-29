@@ -74,6 +74,7 @@ export class AuthenticationService {
       .pipe(
         tap(res => {
           this.storage.set(TOKEN_KEY, res["token"]);
+          console.log(this.helper.decodeToken(res["token"]));
           this.user = this.helper.decodeToken(res["token"]);
           this.authenticationState.next(true);
         }),
