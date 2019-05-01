@@ -8,5 +8,14 @@
 </ion-header>
 
 <ion-content padding>
-
+    <ion-list class="centerList">
+        <ion-item lines="none">
+          <ion-label id="label">Overuren</ion-label>
+          <ion-checkbox id="checkbox"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    
+      <ion-fab horizontal="center">
+        <ion-fab-button (click)="presentToast()">Verstuur</ion-fab-button>
+      </ion-fab>
 </ion-content>
