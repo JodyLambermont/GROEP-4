@@ -3,6 +3,8 @@ import{ CalendarComponent } from 'ionic2-calendar/calendar';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { CalendarService } from '../../services/calendarAPI/calendar.service'
+import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { testUserAgent } from '@ionic/core';
 
 
 @Component({
@@ -14,7 +16,6 @@ import { CalendarService } from '../../services/calendarAPI/calendar.service'
 export class CalendarPage implements OnInit {
   event = {
     title:'',
-    desc:'',
     startTime:'',
     endTime:'',
     allDay:false
@@ -34,18 +35,32 @@ export class CalendarPage implements OnInit {
 
 @ViewChild(CalendarComponent) myCal:CalendarComponent;
   constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string,private calendarservice: CalendarService) {
-      console.log(calendarservice.getLogs().subscribe())
+      calendarservice.getLogs((data)=>{
+        for(var i =0;i < data.length;i++){
+          let eventCopy = {
+            title:data[i]['description'],
+            startTime:new Date(data[i]['start']),
+            endTime:new Date(data[i]['stop']),
+            allDay:false
+          }
+          this.eventSource.push(eventCopy);
+        }
+        this.myCal.loadEvents();
+        this.resetEvent();
+      });
    }
-
 
   ngOnInit() {
     this.resetEvent();
   }
 
+  test(){
+
+  }
+
   resetEvent(){
     this.event = {
       title:'',
-      desc:'',
       startTime:new Date().toISOString(),
       endTime:new Date().toISOString(),
       allDay:false
@@ -57,7 +72,6 @@ export class CalendarPage implements OnInit {
       title:this.event.title,
       startTime:new Date(this.event.startTime),
       endTime:new Date(this.event.endTime),
-      desc:this.event.desc,
       allDay:this.event.allDay
     }
     if(eventCopy.allDay){
@@ -86,7 +100,6 @@ export class CalendarPage implements OnInit {
     
       const alert = await this.alertCtrl.create({
         header: event.title,
-        subHeader: event.desc,
         message: 'From: ' + start + '<br><br>To: ' + end,
         buttons: ['OK']
       });
