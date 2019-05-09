@@ -32,6 +32,10 @@ export class AppComponent {
     this.navCtrl.navigateForward("/admin");
     this.menuCtrl.close();
   }
+  goCalendar() {
+    this.navCtrl.navigateForward("/calendar");
+    this.menuCtrl.close();
+  }
   goSettings() {
     this.navCtrl.navigateForward("/settings");
     this.menuCtrl.close();
