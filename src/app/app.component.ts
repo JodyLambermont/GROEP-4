@@ -6,6 +6,8 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { MenuController } from "@ionic/angular";
 import { AuthenticationService } from "./services/authentication.service";
 import { Router } from "@angular/router";
+import { Storage } from "@ionic/storage";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
   selector: "app-root",
@@ -19,7 +21,9 @@ export class AppComponent {
     public navCtrl: NavController,
     public menuCtrl: MenuController,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private storage:Storage,
+    private helper:JwtHelperService
   ) {
     this.initializeApp();
   }
@@ -36,9 +40,22 @@ export class AppComponent {
     this.navCtrl.navigateForward("/calendar");
     this.menuCtrl.close();
   }
+  goConsultants() {
+    this.navCtrl.navigateForward("/consultants");
+    this.menuCtrl.close();
+  }
   goSettings() {
     this.navCtrl.navigateForward("/settings");
     this.menuCtrl.close();
+  }
+
+  async isHr(){
+    let token = await this.storage.get("access_token").then((token)=>{
+      let decoded = this.helper.decodeToken(token);
+      if(decoded["role"] == "Hr"){
+          return true;
+      }
+    });
   }
 
   initializeApp() {
