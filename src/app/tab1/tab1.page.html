@@ -46,17 +46,18 @@
     </ion-list>
 
     <ion-list class="centerList">
-      <ion-searchbar debounce="250" placeholder="Zoek een project" formControlName="project"></ion-searchbar>
+        <ion-select>
+            <ion-select-option *ngFor="let project of projects" [value]="companyId">{{ companyName }}</ion-select-option>
+          </ion-select>
 
-      <ion-searchbar debounce="250" placeholder="Zoek een activiteit" formControlName="activiteit"></ion-searchbar>
+          <ion-select>
+              <ion-select-option *ngFor="let project of projects" [value]="id">{{ name }}</ion-select-option>
+            </ion-select>
     </ion-list>
     <br />
     <br />
-    <!--
-    <ion-fab horizontal="center">
-      <ion-fab-button type="submit" [disabled]="!logForm.valid">Verstuur </ion-fab-button>
-    </ion-fab>
-    -->
-    <ion-button expand="full" type="submit">Verstuur</ion-button>
+
+      <ion-button expand="full" type="submit" [disabled]="!logForm.valid">Verstuur </ion-button>
+
   </form>
 </ion-content>

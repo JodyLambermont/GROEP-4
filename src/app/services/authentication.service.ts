@@ -6,6 +6,7 @@ import { Storage } from "@ionic/storage";
 import { BehaviorSubject } from "rxjs";
 import { tap, catchError } from "rxjs/operators";
 import { environment } from "../../environments/environment";
+import { ToastController } from "@ionic/angular";
 
 //auth key in local storage
 const TOKEN_KEY = "access_token";
@@ -24,7 +25,8 @@ export class AuthenticationService {
     private helper: JwtHelperService,
     private storage: Storage,
     private plt: Platform,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastController: ToastController
   ) {
     this.plt.ready().then(() => {
       this.checkToken();
@@ -79,6 +81,7 @@ export class AuthenticationService {
           this.authenticationState.next(true);
         }),
         catchError(e => {
+          this.presentToast();
           this.showAlert(e.error.message);
           throw new Error(e);
         })
@@ -103,4 +106,14 @@ export class AuthenticationService {
     });
     alert.then(alert => alert.present());
   }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: "Login gefaald, probeer opnieuw!",
+      duration: 2000,
+      position: 'middle'
+    });
+    toast.present();
+  }
+
 }

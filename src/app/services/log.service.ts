@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Storage } from "@ionic/storage";
-import { AlertController } from "@ionic/angular";
-import { catchError } from "rxjs/operators";
+import { AlertController, SelectValueAccessor } from "@ionic/angular";
+import { catchError, tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -37,13 +37,24 @@ export class LogService {
   }
 
   //   /Log/Create -> API, submit the data to the api with the values fetched from the formgroup
-  async SubmitLog() {
+  async SubmitLog(logform) {
+    logform = JSON.stringify(logform);
     let token = await this.storage.get("access_token");
     var options = new HttpHeaders({
       Authorization: "Bearer" + token,
       APIkey: this.APIKey
     });
-    //still to implement http post request with values
+    return this.http
+    .post(`${this.url}/Log/Create`, logform, { headers: options })
+    .pipe(
+      tap (data => {
+        console.log("POST Request is successful ", data);
+      }),
+      catchError(e => {
+        this.showAlert(e.error.message);
+        throw new Error(e);
+      })
+    );
   }
 
   showAlert(msg) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastController } from "@ionic/angular";
+import { LogService } from "../services/log.service";
 
 @Component({
   selector: "app-tab1",
@@ -9,11 +10,24 @@ import { ToastController } from "@ionic/angular";
 })
 export class Tab1Page implements OnInit {
   logForm: FormGroup;
+  public projects = [];
 
   constructor(
     public toastController: ToastController,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private logService: LogService
+  ) {/*
+    this.logService.GetAllProjects((data)=>
+    for(var i =0;i < data.length;i++){
+      let projectsCopy = {
+        id:data[i]['id'],
+        name:data[i]['name']),
+        companyName:data[i]['companyName']),
+        companyId:data[i]['companyId'])
+      }
+      this.projects.push(projectCopy)
+    )*/
+  }
 
   ngOnInit() {
     this.logForm = this.formBuilder.group({
@@ -28,8 +42,10 @@ export class Tab1Page implements OnInit {
 
   logSubmit() {
     console.log(this.logForm.value);
+    this.logService.SubmitLog(this.logForm.value);
     this.presentToast();
   }
+
   //Makes a popup when sent, no button required to close popup, will automatically close after duration : x (2000 = 2 sec)
   async presentToast() {
     const toast = await this.toastController.create({
