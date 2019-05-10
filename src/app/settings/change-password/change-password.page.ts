@@ -32,7 +32,14 @@ export class ChangePasswordPage implements OnInit {
 
   onSubmit() {
     if(this.passwordForm.value.NewPassword == this.passwordForm.value.RepeatPassword){
-      this.settingsService.resetPassword(this.passwordForm.value).subscribe();
+      this.settingsService.resetPassword(this.passwordForm.value,(data)=>{
+        if(data["succes"]){
+          this.showMessage("Wachtwoord is succesvol veranderd.");
+        }
+        else {
+          this.showAlert("Het oude wachtwoord is niet correct.");
+        }
+      });
     }
     else{
       this.showAlert("De wachtwoorden zijn niet gelijk!");
@@ -43,6 +50,15 @@ export class ChangePasswordPage implements OnInit {
     let alert = this.alertController.create({
       message: msg,
       header: "Error",
+      buttons: ["OK"]
+    });
+    alert.then(alert => alert.present());
+  }
+
+  showMessage(msg) {
+    let alert = this.alertController.create({
+      message: msg,
+      header: "Succes",
       buttons: ["OK"]
     });
     alert.then(alert => alert.present());

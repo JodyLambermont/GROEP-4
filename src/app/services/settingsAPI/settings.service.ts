@@ -27,9 +27,9 @@ export class SettingsService {
     private alertController: AlertController
   ) { }
 
-  resetPassword(passwords){
+  async resetPassword(passwords, success){
     //password = form that gets returned
-    let token = this.storage.get("access_token");
+    let token = await this.storage.get("access_token");
     delete passwords['RepeatPassword'];
     passwords = JSON.stringify(passwords);
     var options = new HttpHeaders({
@@ -37,16 +37,11 @@ export class SettingsService {
       Authorization: "Bearer " + token,
       APIKey: this.APIKey
     });
-    return this.http
-    .post(`${this.url}/Auth/NewPass`, passwords, { headers: options })
-    .pipe(
-      catchError(e => {
-        this.showAlert(e.error.message);
-        throw new Error(e);
-      })
-    );
+    return this.
+    http.post(`${this.url}/Auth/NewPass`, passwords, { headers: options }).subscribe((data)=>{
+      success(data)
+    });
   }
-
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,
