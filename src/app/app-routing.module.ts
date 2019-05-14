@@ -66,7 +66,9 @@ const routes: Routes = [
       "./settings/change-notifications/change-notifications.module#ChangeNotificationsPageModule",
     canActivate: [AuthGuard]
   },
-  { path: 'consultants', loadChildren: './pages/consultants/consultants.module#ConsultantsPageModule' }
+  { path: 'consultants', loadChildren: './pages/consultants/consultants.module#ConsultantsPageModule' },
+  { path: 'consultantdetail', loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' }
+
 
 ];
 @NgModule({

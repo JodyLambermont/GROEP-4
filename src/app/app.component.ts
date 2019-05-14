@@ -14,6 +14,9 @@ import { JwtHelperService } from "@auth0/angular-jwt";
   templateUrl: "app.component.html"
 })
 export class AppComponent {
+
+  showHr : any=false;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -25,6 +28,12 @@ export class AppComponent {
     private storage:Storage,
     private helper:JwtHelperService
   ) {
+    this.storage.get("access_token").then((token)=>{
+      let decoded = this.helper.decodeToken(token);
+      if(decoded["role"] == "Consultant"){
+        this.showHr = true;
+      }
+    });
     this.initializeApp();
   }
 
@@ -47,15 +56,6 @@ export class AppComponent {
   goSettings() {
     this.navCtrl.navigateForward("/settings");
     this.menuCtrl.close();
-  }
-
-  async isHr(){
-    let token = await this.storage.get("access_token").then((token)=>{
-      let decoded = this.helper.decodeToken(token);
-      if(decoded["role"] == "Hr"){
-          return true;
-      }
-    });
   }
 
   initializeApp() {

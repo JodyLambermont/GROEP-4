@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MbscListviewOptions } from '@mobiscroll/angular';
+import { Consultant } from './consultant';
+import { MenuController } from "@ionic/angular";
+import { NavController, NavParams  } from "@ionic/angular";
+
 
 @Component({
   selector: 'app-consultants',
@@ -7,10 +10,24 @@ import { MbscListviewOptions } from '@mobiscroll/angular';
   styleUrls: ['./consultants.page.scss'],
 })
 export class ConsultantsPage implements OnInit {
-
-  constructor() { }
+  consultants = []
+  constructor(    public navCtrl: NavController,
+    public menuCtrl: MenuController,) {
+    this.assignBreeds();
+   }
 
   ngOnInit() {
+  }
+ 
+  assignBreeds() {
+    this.consultants = [
+      new Consultant("arne mergan","e2fds1zr"),new Consultant("ilja de rycke","e21zr"),new Consultant("jody lambroment","e21fdszr"),new Consultant("anthe boets","sfq"),new Consultant("mehdi","sdg")
+    ];
+  }
+
+  itemSelected(consultant){
+    this.navCtrl.navigateForward("/consultantdetail",consultant);
+    this.menuCtrl.close();
   }
 
 }

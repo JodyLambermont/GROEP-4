@@ -10,7 +10,9 @@
         <ion-item (click)='goProfile()'>Profiel</ion-item>
         <ion-item class="admin" (click)='goAdmin()'>Admin</ion-item>
         <ion-item (click)='goCalendar()'>Calendar</ion-item>
-        <ion-item (click)='goConsultants()'>Consultants</ion-item>
+        <div *ngIf='showHr'>
+          <ion-item (click)='goConsultants()'>Consultants</ion-item>
+        </div>
         <ion-item (click)='goSettings()'>Instellingen</ion-item>
       </ion-list>
     </ion-content>
