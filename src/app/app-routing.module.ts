@@ -67,7 +67,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'consultants', loadChildren: './pages/consultants/consultants.module#ConsultantsPageModule' },
-  { path: 'consultantdetail', loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' }
+  { path: 'consultantdetail/:id', loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' }
 
 
 ];

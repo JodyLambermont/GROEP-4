@@ -26,7 +26,7 @@ export class ConsultantsPage implements OnInit {
   }
 
   itemSelected(consultant){
-    this.navCtrl.navigateForward("/consultantdetail",consultant);
+    this.navCtrl.navigateForward("/consultantdetail/"+consultant.id);
     this.menuCtrl.close();
   }
 

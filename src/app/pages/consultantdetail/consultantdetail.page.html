@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
     <ion-title>consultantdetail</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
- {{item}}
+  <ion-item>Naam: voornaam naam</ion-item>
+  <ion-item>Maandloon januari 2019: 2008 euro</ion-item>
+  <ion-button expand="block" color="secondary">Timesheet januari 2019</ion-button>
+ <ion-button expand="block" color="primary">Accepteer</ion-button>
+ <ion-button expand="block" color="secondary">Niet Accepteer </ion-button>
+ <ion-button expand="block" (click)="downloadPdf()" color="danger">Download pdf</ion-button>
 </ion-content>

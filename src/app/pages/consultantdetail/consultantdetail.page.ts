@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Consultant } from './../consultants/consultant';
-import { NavController, NavParams  } from "@ionic/angular";
+import { ActivatedRoute } from '@angular/router';
+
+"https://www.youtube.com/watch?v=mlGehHg4oSA"
 
 @Component({
   selector: 'app-consultantdetail',
@@ -10,12 +12,17 @@ import { NavController, NavParams  } from "@ionic/angular";
 export class ConsultantdetailPage implements OnInit {
 
   item ="";
-  constructor(public navParams: NavParams
+  constructor(private route: ActivatedRoute
   ) {
-    this.item = this.navParams.get('consultant')
+    console.log(this.route.snapshot.paramMap.get('id'));
+
   }
 
   ngOnInit() {
+  }
+
+  downloadPdf(){
+
   }
 
 }
