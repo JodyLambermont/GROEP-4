@@ -65,7 +65,11 @@ const routes: Routes = [
     loadChildren:
       "./settings/change-notifications/change-notifications.module#ChangeNotificationsPageModule",
     canActivate: [AuthGuard]
-  }
+  },
+  { path: 'consultants', loadChildren: './pages/consultants/consultants.module#ConsultantsPageModule' },
+  { path: 'consultantdetail/:id', loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' }
+
+
 ];
 @NgModule({
   imports: [

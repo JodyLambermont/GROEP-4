@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>consultants</ion-title>
+  <ion-buttons slot="start">
+    <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+        <ion-list>
+            <ion-list-header>
+                Consultants
+              </ion-list-header>
+                <ion-item *ngFor = "let item of consultants;" (click)="itemSelected(item)">
+                    {{ item.name }}
+                </ion-item>
+        </ion-list>
+</ion-content>
