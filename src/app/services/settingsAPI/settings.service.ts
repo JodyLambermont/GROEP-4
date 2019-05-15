@@ -27,8 +27,43 @@ export class SettingsService {
     private alertController: AlertController
   ) { }
 
+  async getUsername(success){
+    var options = new HttpHeaders({
+      "Content-Type": "application/json",
+      APIKey: this.APIKey
+    });
+    var body = '{"Id": ""}'
+    return this.
+    http.post(`${this.url}/user/get`, body, { headers: options }).subscribe((data)=>{
+      success(data)
+    });
+  }
+
+  async getWorkweek(success){
+    var options = new HttpHeaders({
+      "Content-Type": "application/json",
+      APIKey: this.APIKey
+    });
+    var body = '{"Id": ""}'
+    return this.
+    http.post(`${this.url}/user/getWorkweek`, body, { headers: options }).subscribe((data)=>{
+      success(data)
+    });
+  }
+
+  async changeWorkweek(success){
+    var options = new HttpHeaders({
+      "Content-Type": "application/json",
+      APIKey: this.APIKey
+    });
+    var body = '{"Id": ""}'
+    return this.
+    http.post(`${this.url}/user/changeWorkweek`, body, { headers: options }).subscribe((data)=>{
+      success(data)
+    });
+  }
+  
   async resetPassword(passwords, success){
-    //password = form that gets returned
     let token = await this.storage.get("access_token");
     delete passwords['RepeatPassword'];
     passwords = JSON.stringify(passwords);

@@ -33,7 +33,7 @@ export class ChangePasswordPage implements OnInit {
   onSubmit() {
     if(this.passwordForm.value.NewPassword == this.passwordForm.value.RepeatPassword){
       this.settingsService.resetPassword(this.passwordForm.value,(data)=>{
-        if(data["succes"]){
+        if(data["successState"]){
           this.showMessage("Wachtwoord is succesvol veranderd.");
         }
         else {
