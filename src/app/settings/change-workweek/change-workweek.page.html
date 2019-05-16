@@ -8,5 +8,83 @@
 </ion-header>
 
 <ion-content padding>
+  <form [formGroup]="weekForm" (ngSubmit)="onSubmit()">
 
+    <ion-item>
+      <ion-label>Maandag begin</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="MaandagBegin"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Maandag einde</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="MaandagEinde"></ion-datetime>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item>
+      <ion-label>Dinsdag begin</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="DinsdagBegin"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dinsdag einde</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="DinsdagEinde"></ion-datetime>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item>
+      <ion-label>Woensdag begin</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="WoensdagBegin"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Woensdag einde</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="WoensdagEinde"></ion-datetime>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item>
+      <ion-label>Donderdag begin</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="DonderdagBegin"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Donderdag einde</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="DonderdagEinde"></ion-datetime>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item>
+      <ion-label>Vrijdag begin</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="VrijdagBegin"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Vrijdag einde</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="VrijdagEinde"></ion-datetime>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item>
+      <ion-label>Zaterdag begin</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="ZaterdagBegin"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Zaterdag einde</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="ZaterdagEinde"></ion-datetime>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item>
+      <ion-label>Zondag begin</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="ZondagBegin"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Zondag einde</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" value="15:23" formControlName="ZondagEinde"></ion-datetime>
+    </ion-item>
+    <br>
+    <br>
+    
+    <ion-button expand="full" type="submit" [disabled]="!weekForm.valid">Submit</ion-button>
+    <!--
+      Unregistered person is not allowed to register himself, implement somewhere else! (use button)
+      <ion-button expand="full" type="button" (click)="register()" [disabled]="!credentialsForm.valid">Register</ion-button>
+      -->
+  </form>
 </ion-content>

@@ -20,16 +20,17 @@ export class ChangeNamePage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.nameForm = this.formBuilder.group({
-      Name: ["", [Validators.required, Validators.minLength(3)]]
-    });
-    var UserName = this.settingsService.getUsername((data)=>{
-      if(data["successState"]){
-        this.showMessage("Wachtwoord is succesvol veranderd.");
+    var UserName
+    this.settingsService.getUsername((data)=>{
+      if(data["name"] != ""){
+        return data["name"]
       }
       else {
-        this.showAlert("Het oude wachtwoord is niet correct.");
+        this.showAlert("Could not retreive username.");
       }
+    });
+    this.nameForm = this.formBuilder.group({
+      NameInput: [UserName, [Validators.required, Validators.minLength(3)]],
     });
   }
 
@@ -53,5 +54,11 @@ export class ChangeNamePage implements OnInit {
       buttons: ["OK"]
     });
     alert.then(alert => alert.present());
+  }
+
+  onSubmit(){
+    this.settingsService.changeUsername(this.nameForm.value, (data) => {
+      
+    })
   }
 }

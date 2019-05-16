@@ -28,13 +28,29 @@ export class SettingsService {
   ) { }
 
   async getUsername(success){
+    let token = await this.storage.get("access_token");
     var options = new HttpHeaders({
       "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
       APIKey: this.APIKey
     });
-    var body = '{"Id": ""}'
+    var body = '{"Id": "' + this.parseJwt(token)["nameid"] + '"}'
     return this.
     http.post(`${this.url}/user/get`, body, { headers: options }).subscribe((data)=>{
+      success(data)
+    });
+  }
+
+  async changeUsername(name, success){
+    let token = await this.storage.get("access_token");
+    name = JSON.stringify(name)
+    var options = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+      APIKey: this.APIKey
+    });
+    return this.
+    http.post(`${this.url}/user/get`, name, { headers: options }).subscribe((data)=>{
       success(data)
     });
   }
@@ -85,4 +101,14 @@ export class SettingsService {
     });
     alert.then(alert => alert.present());
   }
+
+  //https://stackoverflow.com/a/38552302
+  parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(base64);
+  };
 }
