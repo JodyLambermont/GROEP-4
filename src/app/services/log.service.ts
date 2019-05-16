@@ -4,6 +4,7 @@ import { environment } from "../../environments/environment";
 import { Storage } from "@ionic/storage";
 import { AlertController, SelectValueAccessor } from "@ionic/angular";
 import { catchError, tap } from "rxjs/operators";
+import { Projects } from "../interfaces/projects";
 
 @Injectable({
   providedIn: "root"
@@ -20,20 +21,21 @@ export class LogService {
   ) {}
 
   //   /Project/GetList ->API sends all projects ID, name and only those that are in progress // this is used to display in the frontend
-  async GetAllProjects() {
+    async GetAllProjects() {
     let token = await this.storage.get("access_token");
     var options = new HttpHeaders({
-      Authorization: "Bearer" + token,
+      Authorization: "Bearer " + token,
       APIkey: this.APIKey
     });
+    console.log(options);
     return this.http
-      .get(`${this.url}/Project/GetList`, { headers: options })
+      .get<Projects[]>(`${this.url}/Project/GetList`, { headers: options }).toPromise();/*
       .pipe(
         catchError(e => {
           this.showAlert(e.error.message);
           throw new Error(e);
         })
-      );
+      );*/
   }
 
   //   /Log/Create -> API, submit the data to the api with the values fetched from the formgroup
@@ -41,7 +43,7 @@ export class LogService {
     logform = JSON.stringify(logform);
     let token = await this.storage.get("access_token");
     var options = new HttpHeaders({
-      Authorization: "Bearer" + token,
+      Authorization: "Bearer " + token,
       APIkey: this.APIKey
     });
     return this.http

@@ -1,7 +1,9 @@
+import { Projects } from './../interfaces/projects';
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastController } from "@ionic/angular";
 import { LogService } from "../services/log.service";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: "app-tab1",
@@ -10,23 +12,24 @@ import { LogService } from "../services/log.service";
 })
 export class Tab1Page implements OnInit {
   logForm: FormGroup;
-  public projects = [];
+  projects : Promise<any>;
 
   constructor(
     public toastController: ToastController,
     private formBuilder: FormBuilder,
     private logService: LogService
-  ) {/*
-    this.logService.GetAllProjects((data)=>
+  ) {
+    this.projects = this.logService.GetAllProjects().then((data)=> {console.log(data)});
+    /*this.projects = this.logService.GetAllProjects().then((data)=>{
     for(var i =0;i < data.length;i++){
       let projectsCopy = {
         id:data[i]['id'],
-        name:data[i]['name']),
-        companyName:data[i]['companyName']),
-        companyId:data[i]['companyId'])
+        name:data[i]['name'],
+        companyName:data[i]['companyName'],
+        companyId:data[i]['companyId']
       }
-      this.projects.push(projectCopy)
-    )*/
+      
+    ))}*/
   }
 
   ngOnInit() {
