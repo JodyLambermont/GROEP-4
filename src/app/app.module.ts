@@ -16,6 +16,8 @@ import { APP_ROOT } from "@angular/core/src/di/scope";
 
 import { Storage, IonicStorageModule } from "@ionic/storage"; //store JWT token
 import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 export function jwtOptionsFactory(storage) {
   return {
@@ -46,9 +48,11 @@ export function jwtOptionsFactory(storage) {
     })
   ],
   providers: [
+    File,
+    FileOpener,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })
