@@ -27,7 +27,7 @@ export class SettingsService {
     private alertController: AlertController
   ) { }
 
-  async getUsername(success){
+  async getUsername(succes){
     let token = await this.storage.get("access_token");
     var options = new HttpHeaders({
       "Content-Type": "application/json",
@@ -36,10 +36,29 @@ export class SettingsService {
     });
     var body = '{"Id": "' + this.parseJwt(token)["nameid"] + '"}'
     return this.
-    http.post(`${this.url}/user/get`, body, { headers: options }).subscribe((data)=>{
-      success(data)
-    });
+    http.post(`${this.url}/user/get`, body, { headers: options }).subscribe(
+      data=>{
+        succes(data)
+      },
+      error => {  
+        console.error("Error saving food!");
+      }
+    )
   }
+
+  /*
+  .subscribe(
++       data => {
++         // refresh the list
++         this.getFoods();
++         return true;
++       },
++       error => {
++         console.error("Error saving food!");
++         return Observable.throw(error);
++       }
++    );
+  */
 
   async changeUsername(name, success){
     let token = await this.storage.get("access_token");
@@ -51,7 +70,11 @@ export class SettingsService {
     });
     return this.
     http.post(`${this.url}/user/get`, name, { headers: options }).subscribe((data)=>{
-      success(data)
+      success(data),
+      catchError(e => {
+        this.showAlert(e.error.message);
+          throw new Error(e);
+      })
     });
   }
 

@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Platform, AlertController } from "@ionic/angular";
 import { getName } from 'ionicons/dist/types/icon/utils';
+import { Observable } from 'rxjs/Observable';
+import { of } from "rxjs/observable/of";
+import { delay, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-change-name',
@@ -11,6 +14,7 @@ import { getName } from 'ionicons/dist/types/icon/utils';
   styleUrls: ['./change-name.page.scss'],
 })
 export class ChangeNamePage implements OnInit {
+  user: Observable<{}>;
   nameForm: FormGroup;
   constructor(
     public navCtrl: NavController,
@@ -18,21 +22,30 @@ export class ChangeNamePage implements OnInit {
     private settingsService: SettingsService,
     private alertController: AlertController
     ) { }
+    
 
   ngOnInit() {
-    var UserName
-    this.settingsService.getUsername((data)=>{
-      if(data["name"] != ""){
-        return data["name"]
-      }
-      else {
-        this.showAlert("Could not retreive username.");
-      }
-    });
+    this.user = this.getAsyncData().pipe(share());
     this.nameForm = this.formBuilder.group({
-      NameInput: [UserName, [Validators.required, Validators.minLength(3)]],
+      Name: ["", [Validators.required, Validators.minLength(3)]],
     });
+    
   }
+
+  getAsyncData() {
+   return of({
+     firstName: this.getUName(),
+   }).pipe(
+   );
+ }
+
+
+ async getUName(){
+  await this.settingsService.getUsername((data)=>{
+    console.log(data["name"])
+    return data["name"]
+  });
+ }
 
   goBack(){
     this.navCtrl.back();
@@ -58,7 +71,7 @@ export class ChangeNamePage implements OnInit {
 
   onSubmit(){
     this.settingsService.changeUsername(this.nameForm.value, (data) => {
-      
+      console.log(data)
     })
   }
 }
