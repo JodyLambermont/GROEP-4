@@ -97,6 +97,12 @@ export class AuthenticationService {
   isAuthenticated() {
     return this.authenticationState.value;
   }
+/*
+  roleMatch(allowedRoles): Boolean{
+    let isMatch = false;
+    let token =  this.storage.get("access_token");
+    const dToken = this.helper.decodeToken(token);
+  }*/
 
   showAlert(msg) {
     let alert = this.alertController.create({
