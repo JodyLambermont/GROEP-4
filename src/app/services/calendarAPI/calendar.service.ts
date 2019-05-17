@@ -27,7 +27,13 @@ export class CalendarService {
         APIkey: this.APIKey,
         "Authorization":"Bearer " + token,
       });
-      this.http.get(`${this.url}/Log/GetAll`, { headers: options }).subscribe((data)=>{
+      let request = this.http.get(`${this.url}/Log/GetAll`, { headers: options }).pipe(
+        catchError(e => {
+          this.showAlert(e.error.message);
+          throw new Error(e);
+        })
+      );
+      request.subscribe((data)=>{
         success(data)
       });
   }

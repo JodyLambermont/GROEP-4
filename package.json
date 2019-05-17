@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^7.2.15",
     "@angular/common": "^7.2.2",
     "@angular/core": "^7.2.2",
     "@angular/forms": "^7.2.2",
@@ -26,12 +27,15 @@
     "@capacitor/core": "1.0.0-beta.19",
     "@ionic-native/calendar": "^5.5.1",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/file": "^5.0.0",
+    "@ionic-native/file-opener": "^5.0.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.0.0",
     "@ionic/lab": "^1.0.24",
     "@ionic/pro": "2.0.4",
     "@ionic/storage": "^2.2.0",
+    "@mobiscroll/angular": "https://npm.mobiscroll.com/@mobiscroll/angular-trial/-/angular-trial-4.6.3.tgz",
     "@types/jquery": "^3.3.29",
     "@types/jqueryui": "^1.12.7",
     "ajv": "^6.10.0",
@@ -40,6 +44,7 @@
     "cordova-browser": "5.0.4",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "^6.0.1",
+    "cordova-plugin-file-opener2": "2.2.0",
     "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-ionic": "^5.3.0",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
@@ -48,13 +53,16 @@
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "core-js": "^2.5.4",
+    "dom-to-image": "^2.6.0",
     "firebase": "^5.9.0",
     "ionic": "^4.12.0",
     "ionic-calendar": "^1.0.6",
     "ionic2-calendar": "^0.5.2",
     "jquery": "^3.4.1",
     "jqueryui": "^1.11.1",
+    "pdfmake": "^0.1.56",
     "rxjs": "~6.3.3",
+    "rxjs-compat": "^6.5.2",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
@@ -63,7 +71,7 @@
     "@angular-devkit/core": "~7.2.3",
     "@angular-devkit/schematics": "~7.2.3",
     "@angular/cli": "7.2.4",
-    "@angular/compiler": "~7.2.2",
+    "@angular/compiler": "^6.1.1",
     "@angular/compiler-cli": "~7.2.2",
     "@angular/language-service": "~7.2.2",
     "@ionic/angular-toolkit": "~1.4.0",
@@ -73,7 +81,7 @@
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~3.1.4",
+    "karma": "^4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
@@ -93,7 +101,8 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-file-opener2": {}
     },
     "platforms": [
       "android",

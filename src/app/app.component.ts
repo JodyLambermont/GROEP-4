@@ -6,12 +6,17 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { MenuController } from "@ionic/angular";
 import { AuthenticationService } from "./services/authentication.service";
 import { Router } from "@angular/router";
+import { Storage } from "@ionic/storage";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html"
 })
 export class AppComponent {
+
+  showHr : any=false;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -19,8 +24,16 @@ export class AppComponent {
     public navCtrl: NavController,
     public menuCtrl: MenuController,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private storage:Storage,
+    private helper:JwtHelperService
   ) {
+    this.storage.get("access_token").then((token)=>{
+      let decoded = this.helper.decodeToken(token);
+      if(decoded["role"] == "Consultant"){
+        this.showHr = true;
+      }
+    });
     this.initializeApp();
   }
 
@@ -34,6 +47,10 @@ export class AppComponent {
   }
   goCalendar() {
     this.navCtrl.navigateForward("/calendar");
+    this.menuCtrl.close();
+  }
+  goConsultants() {
+    this.navCtrl.navigateForward("/consultants");
     this.menuCtrl.close();
   }
   goSettings() {
