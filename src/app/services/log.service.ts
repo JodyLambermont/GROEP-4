@@ -27,9 +27,9 @@ export class LogService {
       Authorization: "Bearer " + token,
       APIkey: this.APIKey
     });
-    console.log(options);
-    return this.http
-      .get<Projects[]>(`${this.url}/Project/GetList`, { headers: options }).toPromise();/*
+    return await this.http
+      .get<Projects[]>(`${this.url}/Project/GetList`, { headers: options }).toPromise();
+      /*
       .pipe(
         catchError(e => {
           this.showAlert(e.error.message);

@@ -13,25 +13,31 @@ import { Observable } from 'rxjs';
 export class Tab1Page implements OnInit {
   logForm: FormGroup;
   projects : Promise<any>;
+  private projecten : Projects[] = [];
+  //private projectsObservable : Observable<Projects[]> ;
 
   constructor(
     public toastController: ToastController,
     private formBuilder: FormBuilder,
     private logService: LogService
   ) {
-    this.projects = this.logService.GetAllProjects().then((data)=> {console.log(data)});
-    /*this.projects = this.logService.GetAllProjects().then((data)=>{
+    console.log("hier");
+    logService.GetAllProjects().then((data)=>{
+      console.log(data);
     for(var i =0;i < data.length;i++){
       let projectsCopy = {
         id:data[i]['id'],
         name:data[i]['name'],
-        companyName:data[i]['companyName'],
-        companyId:data[i]['companyId']
+        companyId:data[i]['companyId'],
+        overtime:Boolean[i]['overtime'],
+        billable:Boolean[i]['billable']
       }
-      
-    ))}*/
+      this.projecten.push(projectsCopy);
+      console.log("De projecten array: " + this.projecten);
+      console.log("De copy array: " + projectsCopy);
+    }}
+    );
   }
-
   ngOnInit() {
     this.logForm = this.formBuilder.group({
       uur1: ["", [Validators.required]],
