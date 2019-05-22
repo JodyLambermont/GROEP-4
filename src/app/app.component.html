@@ -2,7 +2,7 @@
   <ion-menu contentId="content1" side="start">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Menu</ion-title>
+        <ion-title>Timesheetapp</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -14,6 +14,9 @@
         </div>
         <div *ngIf='showHr'>
           <ion-item (click)='goConsultants()'>Consultants</ion-item>
+        </div>
+        <div *ngIf="showManager">
+          <ion-item (click)="goProjects()">Projects</ion-item>
         </div>
         <ion-item (click)='goSettings()'>Instellingen</ion-item>
         <ion-item (click)='logout()' color='danger'>Afmelden</ion-item>

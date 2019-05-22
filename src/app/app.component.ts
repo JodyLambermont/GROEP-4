@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
 import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { MenuController } from "@ionic/angular";
 import { AuthenticationService } from "./services/authentication.service";
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 import { Storage } from "@ionic/storage";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { from } from 'rxjs';
@@ -14,10 +14,25 @@ import { from } from 'rxjs';
   selector: "app-root",
   templateUrl: "app.component.html"
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+
+  ngOnInit(): void {
+    this.initializeApp();
+    this.storage.get("access_token").then((token)=>{
+      let decoded = this.helper.decodeToken(token);
+      if(decoded["role"] == "Human Resources"){
+        this.showHr = true;
+      }else if(decoded["role"] == "Consultant"){
+        this.showConsultant = true;
+      }else if(decoded["role"] == "Manager"){
+        this.showManager = true;
+      }
+    });
+  }
 
   showHr : any=false;
   showConsultant: any=false;
+  showManager: any=false;
 
   constructor(
     private platform: Platform,
@@ -30,16 +45,13 @@ export class AppComponent {
     private storage:Storage,
     private helper:JwtHelperService
   ) {
-    this.storage.get("access_token").then((token)=>{
-      let decoded = this.helper.decodeToken(token);
-      if(decoded["role"] == "Human Resources"){
-        this.showHr = true;
-      }else if(decoded["role"] == "Consultant"){
-        this.showConsultant = true;
-      }
-    });
-    this.initializeApp();
   }
+
+  goPage(page){
+    this.navCtrl.navigateForward("/"+page);
+    this.menuCtrl.close();
+  }
+
   goHome() {
     this.navCtrl.navigateForward("");
     this.menuCtrl.close();
@@ -54,6 +66,10 @@ export class AppComponent {
   }
   goConsultants() {
     this.navCtrl.navigateForward("/consultants");
+    this.menuCtrl.close();
+  }
+  goProjects() {
+    this.navCtrl.navigateForward("/projects");
     this.menuCtrl.close();
   }
   goSettings() {
