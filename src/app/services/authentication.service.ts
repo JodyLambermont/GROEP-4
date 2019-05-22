@@ -19,6 +19,7 @@ export class AuthenticationService {
   APIKey = environment.APIKey;
   user = null;
   authenticationState = new BehaviorSubject(false);
+  //decodedToken: any;
 
   constructor(
     private http: HttpClient,
@@ -100,9 +101,28 @@ export class AuthenticationService {
 /*
   roleMatch(allowedRoles): Boolean{
     let isMatch = false;
-    let token =  this.storage.get("access_token");
-    const dToken = this.helper.decodeToken(token);
-  }*/
+/*
+    const userRoles = this.storage.get("access_token").then((token)=>{
+      let decoded = this.helper.decodeToken(token);
+      if(decoded["role"] == "Human Resources" || "Manager"){
+        isMatch = true;
+      }
+    }
+    let token = this.storage.get("access_token");
+    console.log("token: " + token);
+    let decodedToken = this.helper.decodeToken();
+    console.log("dtoken: " + decodedToken);
+    const userRoles = decodedToken as Array<string>;
+    console.log("hier123456");
+    console.log(userRoles);
+    allowedRoles.forEach(element => {
+      if (userRoles.includes(element)){
+        isMatch = true;
+        return;
+      }
+    });
+    return isMatch;
+}*/
 
   showAlert(msg) {
     let alert = this.alertController.create({

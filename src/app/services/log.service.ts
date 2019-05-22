@@ -21,21 +21,22 @@ export class LogService {
   ) {}
 
   //   /Project/GetList ->API sends all projects ID, name and only those that are in progress // this is used to display in the frontend
-    async GetAllProjects() {
+    async GetAllProjects(success) {
     let token = await this.storage.get("access_token");
     var options = new HttpHeaders({
       Authorization: "Bearer " + token,
       APIkey: this.APIKey
     });
-    return await this.http
-      .get<Projects[]>(`${this.url}/Project/GetList`, { headers: options }).toPromise();
-      /*
+    let request = this.http
+      .get<Projects[]>(`${this.url}/Project/GetList`, { headers: options })
+      
       .pipe(
         catchError(e => {
           this.showAlert(e.error.message);
           throw new Error(e);
         })
-      );*/
+      );
+      request.subscribe((data=>{success(data)}));
   }
 
   //   /Log/Create -> API, submit the data to the api with the values fetched from the formgroup

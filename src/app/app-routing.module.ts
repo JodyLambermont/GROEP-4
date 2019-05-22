@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: "admin",
-    loadChildren: "./admin/admin.module#AdminPageModule",
+    loadChildren: "./admin/admin.module#AdminPageModule"/*, data: {roles: ['Manager','Human Resources']}*/,
     canActivate: [AuthGuard]
   },
   {

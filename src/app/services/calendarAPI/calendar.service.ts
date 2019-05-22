@@ -27,7 +27,7 @@ export class CalendarService {
         APIkey: this.APIKey,
         "Authorization":"Bearer " + token,
       });
-      let request = this.http.get(`${this.url}/Log/GetAll`, { headers: options }).pipe(
+      let request = this.http.get(`${this.url}/Log/GetAllofUser`, { headers: options }).pipe(
         catchError(e => {
           this.showAlert(e.error.message);
           throw new Error(e);

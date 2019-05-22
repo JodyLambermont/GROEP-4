@@ -31,12 +31,6 @@
         <ion-label position="stacked">Datum</ion-label>
         <ion-input type="Date" formControlName="datum"></ion-input>
       </ion-item>
-      <!--
-    <ion-item lines="none">
-      <ion-label position="stacked">Overuren</ion-label>
-      <ion-checkbox id="overurenCheckbox"></ion-checkbox>
-    </ion-item>
-    -->
     </ion-list>
 
     <ion-list class="centerList">
@@ -44,20 +38,22 @@
         <ion-input id="ActivityInput" placeholder="Wat heeft u gedaan?" formControlName="description"></ion-input>
       </ion-item>
     </ion-list>
-<!--
-    <ion-list class="centerList">
-        <ion-select>
-            <ion-select-option *ngFor="let project of projects" [value]="companyId">{{ companyName }}</ion-select-option>
-          </ion-select>
 
-          <ion-select>
-              <ion-select-option *ngFor="let project of projects" [value]="id">{{ name }}</ion-select-option>
-            </ion-select>
+    <ion-list class="centerList">
+      <ion-label>Selecteer uw project</ion-label>
+        <ion-select formControlName="project">
+            <ion-select-option *ngFor="let project of projecten" [value]="project.id">{{ project.name }}</ion-select-option>
+          </ion-select>
     </ion-list>
+
     <br />
     <br />
--->
-      <ion-button expand="full" type="submit" [disabled]="!logForm.valid">Verstuur </ion-button>
+
+      <ion-button expand="full" type="submit">Verstuur </ion-button>
 
   </form>
 </ion-content>
+
+<!--
+  [disabled]="!logForm.valid"
+-->

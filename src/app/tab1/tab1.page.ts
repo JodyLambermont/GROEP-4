@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastController } from "@ionic/angular";
 import { LogService } from "../services/log.service";
 import { Observable } from 'rxjs';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: "app-tab1",
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
 export class Tab1Page implements OnInit {
   logForm: FormGroup;
   projects : Promise<any>;
-  private projecten : Projects[] = [];
+  protected projecten : Projects[] = []; 
   //private projectsObservable : Observable<Projects[]> ;
 
   constructor(
@@ -21,20 +22,24 @@ export class Tab1Page implements OnInit {
     private formBuilder: FormBuilder,
     private logService: LogService
   ) {
-    console.log("hier");
-    logService.GetAllProjects().then((data)=>{
-      console.log(data);
+    logService.GetAllProjects((data)=>{
+      //console.log(data);
     for(var i =0;i < data.length;i++){
       let projectsCopy = {
         id:data[i]['id'],
         name:data[i]['name'],
         companyId:data[i]['companyId'],
-        overtime:Boolean[i]['overtime'],
-        billable:Boolean[i]['billable']
+        overtime:data[i]['overtime'],
+        billable:data[i]['billable']
       }
       this.projecten.push(projectsCopy);
-      console.log("De projecten array: " + this.projecten);
-      console.log("De copy array: " + projectsCopy);
+      /*
+      console.log("De projecten array: " + projectsCopy.name);
+      console.log("De projecten array: " + projectsCopy.id);
+      console.log("De projecten array: " + projectsCopy.companyId);
+      console.log("De projecten array: " + projectsCopy.overtime);
+      console.log("De projecten array: " + projectsCopy.billable);
+      */
     }}
     );
   }
