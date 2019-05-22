@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Consultant } from './consultant';
 import { MenuController } from "@ionic/angular";
 import { NavController, NavParams  } from "@ionic/angular";
-
+import { ConsultantService } from '../../services/consultantAPI/consultant.service'
+import { DataserviceService } from '../../services/consultantAPI/dataservice.service'
+import { Router  } from '@angular/router';
 
 @Component({
   selector: 'app-consultants',
@@ -12,22 +14,24 @@ import { NavController, NavParams  } from "@ionic/angular";
 export class ConsultantsPage implements OnInit {
   consultants = []
   constructor(    public navCtrl: NavController,
-    public menuCtrl: MenuController,) {
-    this.assignBreeds();
+    public menuCtrl: MenuController,public consultantService: ConsultantService, private dataservice: DataserviceService,private route: Router) {
+    this.assignConsultants();
    }
 
   ngOnInit() {
   }
  
-  assignBreeds() {
-    this.consultants = [
-      new Consultant("arne mergan","e2fds1zr"),new Consultant("ilja de rycke","e21zr"),new Consultant("jody lambroment","e21fdszr"),new Consultant("anthe boets","sfq"),new Consultant("mehdi","sdg")
-    ];
+  assignConsultants() {
+    this.consultantService.getConsultants((data)=>{
+      for(var i =0;i < data.length;i++){
+          this.consultants.push(new Consultant(data[i].name,data[i].id))
+      }
+    });
   }
 
   itemSelected(consultant){
-    this.navCtrl.navigateForward("/consultantdetail/"+consultant.id);
-    this.menuCtrl.close();
+    this.dataservice.setData(1,consultant);
+    this.route.navigateByUrl("/consultantdetail/1")
   }
 
 }

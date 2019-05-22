@@ -8,6 +8,7 @@ import { AuthenticationService } from "./services/authentication.service";
 import { Router } from "@angular/router";
 import { Storage } from "@ionic/storage";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { from } from 'rxjs';
 
 @Component({
   selector: "app-root",
@@ -16,6 +17,8 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class AppComponent {
 
   showHr : any=false;
+  showConsultant: any=false;
+  showManager: any=false;
 
   constructor(
     private platform: Platform,
@@ -30,19 +33,28 @@ export class AppComponent {
   ) {
     this.storage.get("access_token").then((token)=>{
       let decoded = this.helper.decodeToken(token);
-      if(decoded["role"] == "Consultant"){
+      if(decoded["role"] == "Human Resources"){
         this.showHr = true;
+      }else if(decoded["role"] == "Consultant"){
+        this.showConsultant = true;
+      }else if(decoded["role"] == "Manager"){
+        this.showManager = true;
       }
     });
     this.initializeApp();
   }
 
-  goProfile() {
-    this.navCtrl.navigateForward("/profile");
+  goPage(page){
+    this.navCtrl.navigateForward("/"+page);
     this.menuCtrl.close();
   }
-  goAdmin() {
-    this.navCtrl.navigateForward("/admin");
+
+  goHome() {
+    this.navCtrl.navigateForward("");
+    this.menuCtrl.close();
+  }
+  goProfile() {
+    this.navCtrl.navigateForward("/profile");
     this.menuCtrl.close();
   }
   goCalendar() {
@@ -53,9 +65,18 @@ export class AppComponent {
     this.navCtrl.navigateForward("/consultants");
     this.menuCtrl.close();
   }
+  goProjects() {
+    this.navCtrl.navigateForward("/projects");
+    this.menuCtrl.close();
+  }
   goSettings() {
     this.navCtrl.navigateForward("/settings");
     this.menuCtrl.close();
+  }
+
+  logout(){
+    this.menuCtrl.close();
+    this.authService.logout();
   }
 
   initializeApp() {
