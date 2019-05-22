@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>projects</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+        Projects
+      </ion-list-header>
+        <ion-item *ngFor = "let item of projects;" (click)="itemSelected(item)">
+            {{ item.name }}
+        </ion-item>
+</ion-list>
+</ion-content>

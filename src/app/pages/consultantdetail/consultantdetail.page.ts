@@ -17,14 +17,16 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
   styleUrls: ['./consultantdetail.page.scss'],
 })
 export class ConsultantdetailPage implements OnInit {
-
   pdfObj = null;
+  consultant: any;
   constructor(private route: ActivatedRoute, public navCtrl: NavController, private plt: Platform, private file: File, private fileOpener: FileOpener) {
-    console.log(this.route.snapshot.paramMap.get('id'));
-
+    //this.consultant = JSON.parse(this.route.snapshot.paramMap.get('obj')) as Consultant;
   }
 
   ngOnInit() {
+    if(this.route.snapshot.data['special']){
+      this.consultant = this.route.snapshot.data['special'];
+    }
   }
 
   createPDF(){

@@ -3,6 +3,8 @@ import { Consultant } from './consultant';
 import { MenuController } from "@ionic/angular";
 import { NavController, NavParams  } from "@ionic/angular";
 import { ConsultantService } from '../../services/consultantAPI/consultant.service'
+import { DataserviceService } from '../../services/consultantAPI/dataservice.service'
+import { Router  } from '@angular/router';
 
 @Component({
   selector: 'app-consultants',
@@ -12,7 +14,7 @@ import { ConsultantService } from '../../services/consultantAPI/consultant.servi
 export class ConsultantsPage implements OnInit {
   consultants = []
   constructor(    public navCtrl: NavController,
-    public menuCtrl: MenuController,public consultantService: ConsultantService) {
+    public menuCtrl: MenuController,public consultantService: ConsultantService, private dataservice: DataserviceService,private route: Router) {
     this.assignConsultants();
    }
 
@@ -21,16 +23,15 @@ export class ConsultantsPage implements OnInit {
  
   assignConsultants() {
     this.consultantService.getConsultants((data)=>{
-      console.log(data);
+      for(var i =0;i < data.length;i++){
+          this.consultants.push(new Consultant(data[i].name,data[i].id))
+      }
     });
-    this.consultants = [
-      new Consultant("arne mergan","e2fds1zr"),new Consultant("ilja de rycke","e21zr"),new Consultant("jody lambroment","e21fdszr"),new Consultant("anthe boets","sfq"),new Consultant("mehdi","sdg")
-    ];
   }
 
   itemSelected(consultant){
-    this.navCtrl.navigateForward("/consultantdetail/"+consultant.id);
-    this.menuCtrl.close();
+    this.dataservice.setData(1,consultant);
+    this.route.navigateByUrl("/consultantdetail/1")
   }
 
 }

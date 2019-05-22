@@ -6,7 +6,11 @@ import { Storage } from "@ionic/storage";
 import { BehaviorSubject } from "rxjs";
 import { tap, catchError } from "rxjs/operators";
 import { environment } from "../../environments/environment";
+
 import { ToastController } from "@ionic/angular";
+
+import { Router } from '@angular/router';
+
 
 //auth key in local storage
 const TOKEN_KEY = "access_token";
@@ -27,7 +31,11 @@ export class AuthenticationService {
     private storage: Storage,
     private plt: Platform,
     private alertController: AlertController,
+
     private toastController: ToastController
+
+    private router:Router,
+
   ) {
     this.plt.ready().then(() => {
       this.checkToken();
