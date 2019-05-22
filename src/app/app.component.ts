@@ -18,6 +18,7 @@ export class AppComponent {
 
   showHr : any=false;
   showConsultant: any=false;
+  showManager: any=false;
 
   constructor(
     private platform: Platform,
@@ -36,10 +37,18 @@ export class AppComponent {
         this.showHr = true;
       }else if(decoded["role"] == "Consultant"){
         this.showConsultant = true;
+      }else if(decoded["role"] == "Manager"){
+        this.showManager = true;
       }
     });
     this.initializeApp();
   }
+
+  goPage(page){
+    this.navCtrl.navigateForward("/"+page);
+    this.menuCtrl.close();
+  }
+
   goHome() {
     this.navCtrl.navigateForward("");
     this.menuCtrl.close();
@@ -54,6 +63,10 @@ export class AppComponent {
   }
   goConsultants() {
     this.navCtrl.navigateForward("/consultants");
+    this.menuCtrl.close();
+  }
+  goProjects() {
+    this.navCtrl.navigateForward("/projects");
     this.menuCtrl.close();
   }
   goSettings() {

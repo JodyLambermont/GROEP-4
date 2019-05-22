@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
+import { ResolveService } from '../app/services/consultantAPI/resolve.service'
+
 const routes: Routes = [
   {
     path: "",
@@ -67,7 +69,15 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'consultants', loadChildren: './pages/consultants/consultants.module#ConsultantsPageModule' },
-  { path: 'consultantdetail/:id', loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' }
+  { 
+    path: 'consultantdetail/:id', 
+    resolve: { 
+      special: ResolveService
+    },
+    loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' },  { path: 'projects', loadChildren: './pages/projects/projects.module#ProjectsPageModule' },
+  { path: 'add-project', loadChildren: './pages/add-project/add-project.module#AddProjectPageModule' },
+  { path: 'change-project', loadChildren: './pages/change-project/change-project.module#ChangeProjectPageModule' }
+
 
 
 ];
