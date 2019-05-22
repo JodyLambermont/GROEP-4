@@ -42,6 +42,7 @@ export class LogService {
   //   /Log/Create -> API, submit the data to the api with the values fetched from the formgroup
   async SubmitLog(logform) {
     logform = JSON.stringify(logform);
+    console.log(logform);
     let token = await this.storage.get("access_token");
     var options = new HttpHeaders({
       Authorization: "Bearer " + token,

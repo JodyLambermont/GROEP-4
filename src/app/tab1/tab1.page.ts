@@ -45,12 +45,10 @@ export class Tab1Page implements OnInit {
   }
   ngOnInit() {
     this.logForm = this.formBuilder.group({
-      uur1: ["", [Validators.required]],
-      uur2: ["", [Validators.required]],
-      datum: ["", [Validators.required]],
-      description: ["", [Validators.required]],
-      project: ["", [Validators.required]],
-      activiteit: [""]
+      Start: ["", [Validators.required]],
+      Stop: ["", [Validators.required]],
+      Description: ["", [Validators.required]],
+      ProjectId: ["", [Validators.required]]
     });
   }
 
