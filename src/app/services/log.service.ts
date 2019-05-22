@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Storage } from "@ionic/storage";
 import { AlertController, SelectValueAccessor } from "@ionic/angular";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, tap, map } from "rxjs/operators";
 import { Projects } from "../interfaces/projects";
 
 @Injectable({
@@ -45,20 +45,12 @@ export class LogService {
     console.log(logform);
     let token = await this.storage.get("access_token");
     var options = new HttpHeaders({
+      "Content-Type": "application/json",
       Authorization: "Bearer " + token,
       APIkey: this.APIKey
     });
-    return this.http
-    .post(`${this.url}/Log/Create`, logform, { headers: options })
-    .pipe(
-      tap (data => {
-        console.log("POST Request is successful ", data);
-      }),
-      catchError(e => {
-        this.showAlert(e.error.message);
-        throw new Error(e);
-      })
-    );
+    let request =  this.http
+    .post(`${this.url}/Log/Create`, logform, { headers: options }).subscribe(res=>{console.log(res)},err =>{console.log(err)});
   }
 
   showAlert(msg) {
