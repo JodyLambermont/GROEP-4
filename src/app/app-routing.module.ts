@@ -74,7 +74,8 @@ const routes: Routes = [
     resolve: { 
       special: ResolveService
     },
-    loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' },  { path: 'projects', loadChildren: './pages/projects/projects.module#ProjectsPageModule' },
+    loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' },
+  { path: 'projects', loadChildren: './pages/projects/projects.module#ProjectsPageModule' },
   { path: 'add-project', loadChildren: './pages/add-project/add-project.module#AddProjectPageModule' },
   { path: 'change-project', loadChildren: './pages/change-project/change-project.module#ChangeProjectPageModule' }
 
