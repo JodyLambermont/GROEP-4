@@ -1,3 +1,4 @@
+import { User } from './../../interfaces/user';
 import { SettingsService } from './../../services/settingsAPI/settings.service';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit, ViewChild, LOCALE_ID, Inject } from '@angular/core';
@@ -15,7 +16,7 @@ import { delay, share } from 'rxjs/operators';
 })
 
 export class ChangeNamePage implements OnInit {
-  testuser: any;
+  protected users: User;
   nameForm: FormGroup;
   constructor(
     public navCtrl: NavController,
@@ -26,7 +27,13 @@ export class ChangeNamePage implements OnInit {
     @Inject(LOCALE_ID) private locale: string
     ) {
       settingsService.getUsername((data) => {
-        this.testuser = data;
+          let userCopy = {
+            name:data['name']}
+          console.log("hier1");
+        console.log(userCopy);
+          this.users = userCopy;
+          console.log("hier2");
+          console.log(this.users);
         
       })
      }

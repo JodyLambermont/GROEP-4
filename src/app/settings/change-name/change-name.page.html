@@ -16,8 +16,8 @@
       <ion-item lines="none">
         <h2 position="stacked">Uw naam</h2>
       </ion-item>
-      <ion-item *ngFor="let test of testuser">
-        <ion-input formControlName="Name" placeholder="UserName" [value]="test.name"></ion-input>
+      <ion-item>
+        <ion-input formControlName="Name" placeholder="UserName" [value]="users.name"></ion-input>
       </ion-item>
     </ion-list>
   
