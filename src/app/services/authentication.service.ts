@@ -32,9 +32,9 @@ export class AuthenticationService {
     private plt: Platform,
     private alertController: AlertController,
 
-    private toastController: ToastController
+    private toastController: ToastController,
 
-    private router:Router,
+    private router:Router
 
   ) {
     this.plt.ready().then(() => {
