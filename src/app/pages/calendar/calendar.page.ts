@@ -3,8 +3,7 @@ import{ CalendarComponent } from 'ionic2-calendar/calendar';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { CalendarService } from '../../services/calendarAPI/calendar.service'
-import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { testUserAgent } from '@ionic/core';
+
 
 
 @Component({
@@ -23,7 +22,7 @@ export class CalendarPage implements OnInit {
 
   minDate = new Date().toISOString();
 
-  eventSource = [];
+  protected eventSource = [];
   calendar = {
     mode:'month',
     currentDate:new Date()
