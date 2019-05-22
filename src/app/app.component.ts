@@ -47,11 +47,6 @@ export class AppComponent implements OnInit{
   ) {
   }
 
-  goPage(page){
-    this.navCtrl.navigateForward("/"+page);
-    this.menuCtrl.close();
-  }
-
   goHome() {
     this.navCtrl.navigateForward("");
     this.menuCtrl.close();
@@ -60,10 +55,7 @@ export class AppComponent implements OnInit{
     this.navCtrl.navigateForward("/profile");
     this.menuCtrl.close();
   }
-  goCalendar() {
-    this.navCtrl.navigateForward("/calendar");
-    this.menuCtrl.close();
-  }
+
   goConsultants() {
     this.navCtrl.navigateForward("/consultants");
     this.menuCtrl.close();

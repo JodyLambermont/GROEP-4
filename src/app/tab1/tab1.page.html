@@ -44,7 +44,7 @@
     <br />
     <br />
 
-      <ion-button expand="full" type="submit">Verstuur </ion-button>
+      <ion-button expand="full" type="submit" [disabled]="!logForm.valid">Verstuur </ion-button>
 
   </form>
 </ion-content>
