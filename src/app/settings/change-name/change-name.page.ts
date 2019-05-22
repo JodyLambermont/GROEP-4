@@ -1,6 +1,6 @@
 import { SettingsService } from './../../services/settingsAPI/settings.service';
 import { NavController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, LOCALE_ID, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Platform, AlertController } from "@ionic/angular";
 import { getName } from 'ionicons/dist/types/icon/utils';
@@ -13,39 +13,50 @@ import { delay, share } from 'rxjs/operators';
   templateUrl: './change-name.page.html',
   styleUrls: ['./change-name.page.scss'],
 })
+
 export class ChangeNamePage implements OnInit {
-  user: Observable<{}>;
+  testuser: any;
   nameForm: FormGroup;
   constructor(
     public navCtrl: NavController,
     private formBuilder: FormBuilder,
     private settingsService: SettingsService,
-    private alertController: AlertController
-    ) { }
+    private alertController: AlertController,
+    private alertCtrl: AlertController, 
+    @Inject(LOCALE_ID) private locale: string
+    ) {
+      settingsService.getUsername((data) => {
+        this.testuser = data;
+        
+      })
+     }
     
 
   ngOnInit() {
-    this.user = this.getAsyncData().pipe(share());
     this.nameForm = this.formBuilder.group({
       Name: ["", [Validators.required, Validators.minLength(3)]],
     });
-    
   }
 
-  getAsyncData() {
-   return of({
-     firstName: this.getUName(),
-   }).pipe(
-   );
- }
 
-
- async getUName(){
-  await this.settingsService.getUsername((data)=>{
-    console.log(data["name"])
-    return data["name"]
-  });
+  
+  /*
+constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string,private calendarservice: CalendarService) {
+    calendarservice.getLogs((data)=>{
+      for(var i =0;i < data.length;i++){
+        let eventCopy = {
+          title:data[i]['description'],
+          startTime:new Date(data[i]['start']),
+          endTime:new Date(data[i]['stop']),
+          allDay:false
+        }
+        this.eventSource.push(eventCopy);
+      }
+      this.myCal.loadEvents();
+      this.resetEvent();
+    });
  }
+ */
 
   goBack(){
     this.navCtrl.back();

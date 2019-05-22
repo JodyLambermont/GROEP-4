@@ -26,25 +26,20 @@ export class SettingsService {
     private plt: Platform,
     private alertController: AlertController
   ) { }
-
-  async getUsername(succes){
-    let token = await this.storage.get("access_token");
-    var options = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-      APIKey: this.APIKey
-    });
-    var body = '{"Id": "' + this.parseJwt(token)["nameid"] + '"}'
-    return this.
-    http.post(`${this.url}/user/get`, body, { headers: options }).subscribe(
-      data=>{
-        succes(data)
-      },
-      error => {  
-        console.error("Error saving food!");
-      }
-    )
-  }
+    
+  async getUsername(success){
+    let token = await this.storage.get('access_token')
+      var options = new HttpHeaders({
+        "Content-Type": "application/json",
+        APIkey: this.APIKey,
+        "Authorization":"Bearer " + token,
+      });
+      let id = this.helper.decodeToken(token)["nameid"];
+      console.log(id);
+      let request = this.http.post(`${this.url}/user/get`,JSON.stringify({"id":id}),{ headers: options }).subscribe((data)=>{
+        success(data)
+      });
+}
 
   /*
   .subscribe(
