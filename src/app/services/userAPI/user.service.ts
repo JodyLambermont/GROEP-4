@@ -37,6 +37,7 @@ export class UserService {
   //async for token storage, ionic storage is slow hence await (otherwise api call keeps rejecting with error: unauthorised)
   async SubmitRemovePerson(personeelsform) {
     personeelsform = JSON.stringify(personeelsform);
+    console.log("hier1");
     console.log(personeelsform);
     let token = await this.storage.get("access_token");
     var options = new HttpHeaders({
@@ -44,7 +45,7 @@ export class UserService {
       Authorization: "Bearer " + token,
       APIkey: this.APIKey
     });
-    let request =  this.http
+    return this.http
     .post(`${this.url}/Project/RemoveUser`, personeelsform, { headers: options }).subscribe(res=>{console.log(res)},err =>{this.showAlert(err)});
   }  
 
