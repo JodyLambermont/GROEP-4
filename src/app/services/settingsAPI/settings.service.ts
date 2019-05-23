@@ -17,6 +17,7 @@ export class SettingsService {
   url = environment.url;
   APIKey = environment.APIKey;
   user = null;
+  workweekid = null;
   authenticationState = new BehaviorSubject(false);
 
   constructor(
@@ -35,25 +36,10 @@ export class SettingsService {
         "Authorization":"Bearer " + token,
       });
       let id = this.helper.decodeToken(token)["nameid"];
-      console.log(id);
       let request = this.http.post(`${this.url}/user/get`,JSON.stringify({"id":id}),{ headers: options }).subscribe((data)=>{
         success(data)
       });
-}
-
-  /*
-  .subscribe(
-+       data => {
-+         // refresh the list
-+         this.getFoods();
-+         return true;
-+       },
-+       error => {
-+         console.error("Error saving food!");
-+         return Observable.throw(error);
-+       }
-+    );
-  */
+  }
 
   async changeUsername(name, success){
     let token = await this.storage.get("access_token");
@@ -63,8 +49,9 @@ export class SettingsService {
       Authorization: "Bearer " + token,
       APIKey: this.APIKey
     });
+    let id = this.helper.decodeToken(token)["nameid"];
     return this.
-    http.post(`${this.url}/user/get`, name, { headers: options }).subscribe((data)=>{
+    http.post(`${this.url}/user/update`, '{"id":"' + id+'",'+ name.substring(1), { headers: options }).subscribe((data)=>{
       success(data),
       catchError(e => {
         this.showAlert(e.error.message);
@@ -73,27 +60,50 @@ export class SettingsService {
     });
   }
 
-  async getWorkweek(success){
-    var options = new HttpHeaders({
-      "Content-Type": "application/json",
-      APIKey: this.APIKey
-    });
-    var body = '{"Id": ""}'
-    return this.
-    http.post(`${this.url}/user/getWorkweek`, body, { headers: options }).subscribe((data)=>{
-      success(data)
-    });
+  async getWorkweekID(success){
+    let token = await this.storage.get('access_token')
+      var options = new HttpHeaders({
+        "Content-Type": "application/json",
+        APIkey: this.APIKey,
+        "Authorization":"Bearer " + token,
+      });
+      let id = this.helper.decodeToken(token)["nameid"];
+      let request = this.http.post(`${this.url}/user/get`,JSON.stringify({"id":id}),{ headers: options }).subscribe((data)=>{
+        this.workweekid = data["defaultWorkweekId"]
+        success(data)
+      });
   }
 
-  async changeWorkweek(success){
+  async getWorkweek(success){
+    let token = await this.storage.get('access_token')
+    this.getWorkweekID((data) => {
+      var options = new HttpHeaders({
+        "Content-Type": "application/json",
+        APIkey: this.APIKey,
+        "Authorization":"Bearer " + token,
+      });
+      let request = this.http.post(`${this.url}/user/GetDefaultWorkWeek?Id=` + this.workweekid,"{}",{ headers: options }).subscribe((data)=>{
+        success(data)
+      });
+    })
+  }
+
+  async changeWorkweek(name, success){
+    let token = await this.storage.get("access_token");
+    name = JSON.stringify(name)
     var options = new HttpHeaders({
       "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
       APIKey: this.APIKey
     });
-    var body = '{"Id": ""}'
+    let id = this.helper.decodeToken(token)["nameid"];
     return this.
-    http.post(`${this.url}/user/changeWorkweek`, body, { headers: options }).subscribe((data)=>{
-      success(data)
+    http.post(`${this.url}/user/UpdateDefaultWorkWeek`, '{"id":"' + id+'",'+ name.substring(1), { headers: options }).subscribe((data)=>{
+      success(data),
+      catchError(e => {
+        this.showAlert(e.error.message);
+          throw new Error(e);
+      })
     });
   }
   
@@ -111,6 +121,13 @@ export class SettingsService {
       success(data)
     });
   }
+
+  generateWeekBody(workweek, token){
+    var message = '{"id":"' + this.helper.decodeToken(token)["nameid"] + '","monday":{"id":"';
+    message += workweek.MaandagID + "";
+    return message;
+  }
+
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,

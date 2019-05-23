@@ -1,13 +1,8 @@
 import { User } from './../../interfaces/user';
 import { SettingsService } from './../../services/settingsAPI/settings.service';
-import { NavController } from '@ionic/angular';
-import { Component, OnInit, ViewChild, LOCALE_ID, Inject } from '@angular/core';
+import { NavController, AlertController } from '@ionic/angular';
+import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Platform, AlertController } from "@ionic/angular";
-import { getName } from 'ionicons/dist/types/icon/utils';
-import { Observable } from 'rxjs/Observable';
-import { of } from "rxjs/observable/of";
-import { delay, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-change-name',
@@ -29,12 +24,7 @@ export class ChangeNamePage implements OnInit {
       settingsService.getUsername((data) => {
           let userCopy = {
             name:data['name']}
-          console.log("hier1");
-        console.log(userCopy);
           this.users = userCopy;
-          console.log("hier2");
-          console.log(this.users);
-        
       })
      }
     
