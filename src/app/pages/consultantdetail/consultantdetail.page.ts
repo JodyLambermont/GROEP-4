@@ -8,8 +8,10 @@ import { NavController, Platform } from '@ionic/angular';
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer/ngx";
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { ConsultantService } from '../../services/consultantAPI/consultant.service';
 
 "https://ionicacademy.com/create-pdf-files-ionic-pdfmake/"
+"https://codepen.io/ionic/pen/uJkCz"
 
 @Component({
   selector: 'app-consultantdetail',
@@ -19,13 +21,35 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 export class ConsultantdetailPage implements OnInit {
   pdfObj = null;
   consultant: any;
-  constructor(private route: ActivatedRoute, public navCtrl: NavController, private plt: Platform, private file: File, private fileOpener: FileOpener) {
-    //this.consultant = JSON.parse(this.route.snapshot.paramMap.get('obj')) as Consultant;
+  logs = [];
+  uren = 12;
+  showDetails = false;
+  showLogs = false;
+  constructor(private consultantservice:ConsultantService,private route: ActivatedRoute, public navCtrl: NavController, private plt: Platform, private file: File, private fileOpener: FileOpener) {
+    this.consultant = consultantservice.getConsultantsonid((data)=>{
+      this.consultant = data;
+    },this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit() {
-    if(this.route.snapshot.data['special']){
+    /*if(this.route.snapshot.data['special']){
       this.consultant = this.route.snapshot.data['special'];
+  }*/
+  }
+
+  toggleDetails(data){
+      if(data == false){
+        this.showDetails = true
+      }else{
+        this.showDetails = false
+      }
+  }
+
+  toggleLogs(data){
+    if(data == false){
+      this.showLogs = true
+    }else{
+      this.showLogs = false
     }
   }
 
