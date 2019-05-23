@@ -1,0 +1,78 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ToastController } from "@ionic/angular";
+import { LogService } from "../../../services/log.service";
+import { ConsultantService} from '../../../services/consultantAPI/consultant.service';
+import { Projects } from "../../../interfaces/projects";
+import { Consultant } from "../../consultants/consultant";
+
+@Component({
+  selector: 'app-remove-user-from-project',
+  templateUrl: './remove-user-from-project.page.html',
+  styleUrls: ['./remove-user-from-project.page.scss'],
+})
+export class RemoveUserFromProjectPage implements OnInit {
+
+  personeelsForm: FormGroup;
+
+  protected projecten : Projects[] = [];
+  protected personeel : Consultant[] = [];
+
+  constructor(
+    public toastController: ToastController,
+    private formBuilder: FormBuilder,
+    private logService: LogService,
+    private consultantService: ConsultantService    
+  ) {
+    //get all projects in an array to use in html
+    logService.GetAllProjects((data)=>{
+      //console.log(data);
+    for(var i =0;i < data.length;i++){
+      let projectsCopy = {
+        id:data[i]['id'],
+        name:data[i]['name'],
+        companyId:data[i]['companyId'],
+        overtime:data[i]['overtime'],
+        billable:data[i]['billable']
+      }
+      this.projecten.push(projectsCopy);
+      /*
+      console.log("De projecten array: " + projectsCopy.name);
+      console.log("De projecten array: " + projectsCopy.id);
+      console.log("De projecten array: " + projectsCopy.companyId);
+      console.log("De projecten array: " + projectsCopy.overtime);
+      console.log("De projecten array: " + projectsCopy.billable);
+      */
+    }}
+    );
+
+    //get all consultants in an arrary to use in html
+    consultantService.getConsultants((data)=>{
+      for(var i =0;i < data.length;i++){
+          let personeelsCopy = {
+            id:data[i]['id'],
+            name:data[i]['name']
+          }
+          this.personeel.push(personeelsCopy);
+          /*
+          console.log("De projecten array: " + personeelsCopy.id);
+          console.log("De projecten array: " + personeelsCopy.name);
+          */
+        }
+      });
+    }
+
+  ngOnInit() {
+    //initialize the reactive form
+    this.personeelsForm = this.formBuilder.group({
+      ProjectId: ["", [Validators.required]],
+      UserIds: ["", [Validators.required]]
+    });
+  }
+
+  //submit all values (requires projectid and userid(s))
+  personeelSubmit() {
+    console.log(this.personeelsForm.value);
+  }  
+
+}

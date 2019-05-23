@@ -13,7 +13,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class Tab1Page implements OnInit {
   logForm: FormGroup;
-  projects : Promise<any>;
+  //projects : Promise<any>;
   protected projecten : Projects[] = []; 
   //private projectsObservable : Observable<Projects[]> ;
 

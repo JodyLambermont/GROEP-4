@@ -21,7 +21,7 @@ export class ConsultantService {
 
   async getConsultants(success){
     let token = await this.storage.get('access_token')
-    console.log(token);
+    //console.log(token);
       var options = new HttpHeaders({
         "Content-Type": "application/json",
         APIkey: this.APIKey,
@@ -34,7 +34,7 @@ export class ConsultantService {
         })
       );
       request.subscribe((data)=>{
-        console.log(data);
+        //console.log(data);
         success(data)
       });
   }

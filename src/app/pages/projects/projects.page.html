@@ -1,13 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>projects</ion-title>
+    <ion-title>projecten</ion-title>
+      <ion-button (click)="goAddUsers()">Voeg personeel toe aan een project</ion-button>
+      <ion-button (click)="goRemoveUsers()">Verwijder personeel van een project</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list>
     <ion-list-header>
-        Projects
+        Projecten
       </ion-list-header>
         <ion-item *ngFor = "let item of projects;" (click)="itemSelected(item)">
             {{ item.name }}

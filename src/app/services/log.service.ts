@@ -38,7 +38,6 @@ export class LogService {
       );
       request.subscribe((data=>{success(data)}));
   }
-
   //   /Log/Create -> API, submit the data to the api with the values fetched from the formgroup
   async SubmitLog(logform) {
     logform = JSON.stringify(logform);

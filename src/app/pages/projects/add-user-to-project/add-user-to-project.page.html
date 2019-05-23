@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>addUserToProject</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <form [formGroup]="personeelsForm" (ngSubmit)="personeelSubmit()">
+
+      <ion-list class="centerList">
+        <ion-label>Selecteer een project</ion-label>
+        <ion-select formControlName="ProjectId">
+              <ion-select-option *ngFor="let project of projecten" [value]="project.id">{{ project.name }}</ion-select-option>
+        </ion-select>
+      </ion-list>
+
+      <ion-list class="centerList">
+        <ion-label>Selecteer personeel  om te toe te voegen van een project</ion-label>
+          <ion-select multiple="true" formControlName="UserIds">
+              <ion-select-option *ngFor="let persoon of personeel" [value]="persoon.id">{{ persoon.name }}</ion-select-option>
+        </ion-select>
+      </ion-list>
+
+      <ion-button expand="full" type="submit" [disabled]="!personeelsForm.valid">Verstuur </ion-button>
+
+      </form>
+</ion-content>
