@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastController } from "@ionic/angular";
+import { NavController } from '@ionic/angular';
 import { LogService } from "../../../services/log.service";
 import { ConsultantService} from '../../../services/consultantAPI/consultant.service';
 import { UserService } from '../../../services/userAPI/user.service';
@@ -20,11 +21,12 @@ export class AddUserToProjectPage implements OnInit {
   protected personeel : Consultant[] = [];
 
   constructor(
-    public toastController: ToastController,
+    private toastController: ToastController,
     private formBuilder: FormBuilder,
     private logService: LogService,
     private consultantService: ConsultantService,
-    private userService: UserService
+    private userService: UserService,
+    private navCtrl: NavController
   ) {
     //get all projects in an array to use in html
     logService.GetAllProjects((data)=>{
@@ -70,11 +72,15 @@ export class AddUserToProjectPage implements OnInit {
 
   //submit all values (requires projectid and userid(s))
   personeelSubmit() {
-    //console.log(this.personeelsForm.value);
+    console.log(this.personeelsForm.value);
     this.userService.SubmitAddPerson(this.personeelsForm.value);
     this.presentToast();
   }
 
+  //function to navigate back
+  goBack(){
+    this.navCtrl.back();
+  }
 
   //Makes a popup when sent, no button required to close popup, will automatically close after duration : x (2000 = 2 sec)
   async presentToast() {
