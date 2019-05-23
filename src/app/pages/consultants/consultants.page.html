@@ -12,7 +12,13 @@
     <div *ngIf="items.length">
         <ion-list>
                 <ion-item *ngFor = "let item of items;" (click)="itemSelected(item)">
-                    {{ item.name }}
+                    <ion-label>{{ item.name }}</ion-label>
+                    <div slot="end">
+                      {{ item.accepted }}
+                  </div>
+                    <div slot="end" class='salary'>
+                      {{ item.salary }}
+                  </div>
                 </ion-item>
         </ion-list>
       </div>

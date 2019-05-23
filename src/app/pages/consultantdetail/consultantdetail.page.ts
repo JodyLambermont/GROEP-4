@@ -22,19 +22,34 @@ export class ConsultantdetailPage implements OnInit {
   pdfObj = null;
   consultant: any;
   logs = [];
-  uren = 12;
+  uren = "0";
   showDetails = false;
   showLogs = false;
+  date = new Date().toISOString();
   constructor(private consultantservice:ConsultantService,private route: ActivatedRoute, public navCtrl: NavController, private plt: Platform, private file: File, private fileOpener: FileOpener) {
-    this.consultant = consultantservice.getConsultantsonid((data)=>{
-      this.consultant = data;
-    },this.route.snapshot.paramMap.get('id'));
+    this.consultant = this.assignConsultantDetail(Date.now);
   }
 
   ngOnInit() {
     /*if(this.route.snapshot.data['special']){
       this.consultant = this.route.snapshot.data['special'];
   }*/
+  }
+
+  assignConsultantDetail(month){
+    return this.consultantservice.getConsultantDetail((data)=>{
+      console.log(data);
+      this.consultant = data;
+      if(data.workMonth != null){
+        this.uren = data.workMonth.totalHours;
+      }else{
+        this.uren = "0";
+      }
+    },this.route.snapshot.paramMap.get('id'),month);
+  }
+
+  onMonthChange(input){
+    this.consultant = this.assignConsultantDetail(input.detail.value);
   }
 
   toggleDetails(data){

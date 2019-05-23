@@ -9,12 +9,19 @@
 
 <ion-content padding>
   <ion-card>
+    <ion-card-header>
+        <ion-item>
+            <ion-label >Maand</ion-label>
+            <ion-datetime display-format="MMMM-YYYY" picker-format="MMMM-YYYY" (ionChange)="onMonthChange($event)" [(ngModel)]="date" ></ion-datetime >
+        </ion-item>
+    </ion-card-header>
+  </ion-card>
+  <ion-card>
     <ion-card-header (click)="toggleDetails(showDetails)">
       <ion-card-title>{{ consultant.name }}</ion-card-title>
       <div class="ion-float-right">      
           <ion-icon color="primary" name="arrow-dropdown" float-right large></ion-icon>
         </div>
-      <ion-card-subtitle>januari 2019</ion-card-subtitle>
     </ion-card-header>
   
     <ion-card-content *ngIf="showDetails">
@@ -27,7 +34,6 @@
       <div class="ion-float-right">      
         <ion-icon color="primary" name="arrow-dropdown" float-right large></ion-icon>
       </div>
-      <ion-card-subtitle>januari 2019</ion-card-subtitle>
     </ion-card-header>
   
     <ion-card-content *ngIf="showLogs">
