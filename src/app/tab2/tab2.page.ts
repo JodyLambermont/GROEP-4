@@ -5,6 +5,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { testUserAgent } from '@ionic/core';
 import { Tab2Service } from '../services/tab2API/tab2.service';
 import {IonInfiniteScroll } from '@ionic/angular';
+import { ProjectService } from '../services/projectAPI/project.service';
 
 @Component({
   selector: 'app-tab2',
@@ -25,7 +26,7 @@ export class Tab2Page {
   test: any;
   items;
 
-  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string,private tab2service: Tab2Service) {
+  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string,private tab2service: Tab2Service, private projectservice: ProjectService) {
      /* tab2service.getAllOfUser((data)=>{
         for(var i = 0;i < data.length;i++){
           let eventCopy = {
@@ -42,8 +43,22 @@ export class Tab2Page {
       tab2service.getAllOfUser((data)=>{
         this.test = data;
         });
-      
+      projectservice.getProjects((data)=>{
+        this.projects = data;
+      })
    } 
+
+   projects: any;
+
+   compareWithFn = (o1, o2) => {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
+  };
+
+   public form = [
+    { val: 'Project 1', isChecked: true },
+    { val: 'Project 2', isChecked: false },
+    { val: 'Activity 4', isChecked: false }
+  ];
    loadData(event) {
     setTimeout(() => {
       console.log('Done');

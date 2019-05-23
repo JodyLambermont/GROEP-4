@@ -15,15 +15,16 @@
     <ion-list>
         <ion-item-group *ngFor="let tes of test">
             <ion-item>
-              <ion-item>{{tes.start}}</ion-item>
-              <br />
-              <hr />
-              <ion-item>{{tes.description}}</ion-item>  
-              <br />
-              <hr />  
-              <ion-item>{{tes.stop}}</ion-item>
-              <br />
-              <hr />
+             <ion-content>
+              <ion-item lines="none">{{tes.start}}</ion-item></ion-content>
+             <ion-content id="proj">                
+              <ion-item>{{tes.description}} <br/><hr/>
+        <ion-select>
+                  <ion-select-option *ngFor="let project of projects">{{project.name}}</ion-select-option>
+          </ion-select></ion-item> </ion-content>   
+            <ion-content>
+              <ion-item lines="none">{{tes.stop}}</ion-item></ion-content>
+          
               <ion-button>EDIT</ion-button>
             </ion-item>
           </ion-item-group>
@@ -36,3 +37,10 @@
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </ion-content>
+
+  <!-- <ion-list>
+    <ion-item *ngFor="let entry of form">
+      <ion-label>{{entry.val}}</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+    </ion-item>
+  </ion-list> -->
