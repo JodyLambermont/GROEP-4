@@ -37,7 +37,8 @@ export class ProjectsPage implements OnInit {
   }
 
   itemSelected(item){
-    
+    this.navCtrl.navigateForward("/projectdetail/"+item.id);
+    this.menuCtrl.close();
   }
 
 

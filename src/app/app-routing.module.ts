@@ -77,7 +77,9 @@ const routes: Routes = [
     loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' },
   { path: 'projects', loadChildren: './pages/projects/projects.module#ProjectsPageModule' },
   { path: 'add-project', loadChildren: './pages/add-project/add-project.module#AddProjectPageModule' },
-  { path: 'change-project', loadChildren: './pages/change-project/change-project.module#ChangeProjectPageModule' },  { path: 'add-user-to-project', loadChildren: './pages/projects/add-user-to-project/add-user-to-project.module#AddUserToProjectPageModule' },
+  { path: 'change-project', loadChildren: './pages/change-project/change-project.module#ChangeProjectPageModule' },
+  { path: 'add-user-to-project', loadChildren: './pages/projects/add-user-to-project/add-user-to-project.module#AddUserToProjectPageModule' },
+   { path: 'projectdetail/:id', loadChildren: './pages/projectdetail/projectdetail.module#ProjectdetailPageModule' },
   { path: 'remove-user-from-project', loadChildren: './pages/projects/remove-user-from-project/remove-user-from-project.module#RemoveUserFromProjectPageModule' }
 
 
