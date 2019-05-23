@@ -11,13 +11,13 @@
 
 <ion-content>
     <br>
-  
+    <form [formGroup]="nameForm" (ngSubmit)="onSubmit()">
     <ion-list class="centerList">
       <ion-item lines="none">
         <h2 position="stacked">Uw naam</h2>
       </ion-item>
       <ion-item>
-        <ion-input id="ActivityInput" placeholder="UserName"></ion-input>
+        <ion-input formControlName="Name" placeholder="UserName" [value]="users.name"></ion-input>
       </ion-item>
     </ion-list>
   
@@ -26,7 +26,6 @@
     <br>
     <br>
   
-    <ion-fab horizontal="center">
-      <ion-fab-button (click)="presentToast()">Bevestig</ion-fab-button>
-    </ion-fab>
+    <ion-button expand="full" type="submit" [disabled]="!nameForm.valid">Submit</ion-button>
+    </form>
 </ion-content>

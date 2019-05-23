@@ -1,16 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Platform, AlertController, Events } from "@ionic/angular";
+import { Platform, AlertController, Events, ToastController } from "@ionic/angular";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Storage } from "@ionic/storage";
 import { BehaviorSubject } from "rxjs";
 import { tap, catchError } from "rxjs/operators";
 import { environment } from "../../environments/environment";
-
-import { ToastController } from "@ionic/angular";
-
 import { Router } from '@angular/router';
-
 
 //auth key in local storage
 const TOKEN_KEY = "access_token";
@@ -23,7 +19,6 @@ export class AuthenticationService {
   APIKey = environment.APIKey;
   user = null;
   authenticationState = new BehaviorSubject(false);
-  //decodedToken: any;
 
   constructor(
     private http: HttpClient,
@@ -97,7 +92,6 @@ export class AuthenticationService {
           this.authenticationState.next(true);
         }),
         catchError(e => {
-          this.presentToast();
           this.showAlert(e.error.message);
           throw new Error(e);
         })
@@ -113,31 +107,6 @@ export class AuthenticationService {
   isAuthenticated() {
     return this.authenticationState.value;
   }
-/*
-  roleMatch(allowedRoles): Boolean{
-    let isMatch = false;
-/*
-    const userRoles = this.storage.get("access_token").then((token)=>{
-      let decoded = this.helper.decodeToken(token);
-      if(decoded["role"] == "Human Resources" || "Manager"){
-        isMatch = true;
-      }
-    }
-    let token = this.storage.get("access_token");
-    console.log("token: " + token);
-    let decodedToken = this.helper.decodeToken();
-    console.log("dtoken: " + decodedToken);
-    const userRoles = decodedToken as Array<string>;
-    console.log("hier123456");
-    console.log(userRoles);
-    allowedRoles.forEach(element => {
-      if (userRoles.includes(element)){
-        isMatch = true;
-        return;
-      }
-    });
-    return isMatch;
-}*/
 
   showAlert(msg) {
     let alert = this.alertController.create({
@@ -147,14 +116,4 @@ export class AuthenticationService {
     });
     alert.then(alert => alert.present());
   }
-
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: "Login gefaald, probeer opnieuw!",
-      duration: 2000,
-      position: 'middle'
-    });
-    toast.present();
-  }
-
 }
