@@ -116,10 +116,19 @@ export class Tab2Page {
           this.changedEnd = alertData.addEnd;
           let editedId = this.test[0].id;
           console.log(editedId);
+
+          var finalStartDate = new Date(this.changedSDate + "T" + this.changedStart + ":00")
+          console.log(finalStartDate)
+          finalStartDate.toISOString
+          console.log(finalStartDate)
+          console.log(this.changedSDate)
+          console.log(this.changedStart)
+          var finalEndDate = new Date(this.changedEDate + "T" + this.changedEnd + ":00")
+          console.log(finalEndDate)
           var changedArray = {
             Id: editedId,
-            Start: this.changedSDate,
-            Stop: this.changedEDate,
+            Start: finalStartDate,
+            Stop: finalEndDate,
             Description: this.changedDesc
           }
           // changedArray[0] = editedId;
