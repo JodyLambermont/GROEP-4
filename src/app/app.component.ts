@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
-import { Platform } from "@ionic/angular";
+import { Platform,Events } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { MenuController } from "@ionic/angular";
@@ -18,21 +18,8 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.initializeApp();
-    this.storage.get("access_token").then((token)=>{
-      let decoded = this.helper.decodeToken(token);
-      if(decoded["role"] == "Human Resources"){
-        this.showHr = true;
-      }else if(decoded["role"] == "Consultant"){
-        this.showConsultant = true;
-      }else if(decoded["role"] == "Manager"){
-        this.showManager = true;
-      }
-    });
   }
-
-  showHr : any=false;
-  showConsultant: any=false;
-  showManager: any=false;
+  pages= [];
 
   constructor(
     private platform: Platform,
@@ -43,8 +30,33 @@ export class AppComponent implements OnInit{
     private authService: AuthenticationService,
     private router: Router,
     private storage:Storage,
-    private helper:JwtHelperService
+    private helper:JwtHelperService,
+    public events:Events,
   ) {
+    this.storage.get('access_token').then((token)=>{
+      let data = this.helper.decodeToken(token);
+      if(data["role"] == "Human Resources"){
+        this.events.publish('user:hr');
+      }else if(data["role"] == "Consultant"){
+        this.events.publish('user:co');
+      }else if(data["role"] == "Manager"){
+        this.events.publish('user:mgr');
+      }
+    });
+    events.subscribe("user:hr",()=>{
+      this.pages = [{title:"Consultants",link:"/consultants"},{title:"Projects",link:"/projects"}];
+      });
+      events.subscribe("user:co",()=>{
+        this.pages = [];
+    });
+    events.subscribe("user:mgr",()=>{
+      this.pages = [{title:"Consultants",link:"/consultants"},{title:"Projects",link:"/projects"}];
+  });
+  }
+
+  goPage(page){
+    this.navCtrl.navigateForward(page);
+    this.menuCtrl.close();
   }
 
   goHome() {
