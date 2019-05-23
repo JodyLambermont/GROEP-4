@@ -1,11 +1,16 @@
+import { NavController, AlertController, ModalController } from '@ionic/angular';
 import { Component, OnInit, ViewChild,Inject,LOCALE_ID } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { testUserAgent } from '@ionic/core';
 import { Tab2Service } from '../services/tab2API/tab2.service';
 import {IonInfiniteScroll } from '@ionic/angular';
 import { ProjectService } from '../services/projectAPI/project.service';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { text } from '@angular/core/src/render3';
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
+
+
 
 @Component({
   selector: 'app-tab2',
@@ -25,8 +30,14 @@ export class Tab2Page {
   eventsources: any;
   test: any;
   items;
-
-  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string,private tab2service: Tab2Service, private projectservice: ProjectService) {
+  editForm: FormGroup;
+  changed: any;
+  changedDesc: any;
+  changedSDate: any;
+  changedEDate: any;
+  changedStart: any;
+  changedEnd: any;
+  constructor(private modal: ModalController, public navCtrl: NavController, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string,private tab2service: Tab2Service, private projectservice: ProjectService) {
      /* tab2service.getAllOfUser((data)=>{
         for(var i = 0;i < data.length;i++){
           let eventCopy = {
@@ -47,6 +58,107 @@ export class Tab2Page {
         this.projects = data;
       })
    } 
+
+  //  async openModal(){
+  //    const myModal = await this.modal.create({
+  //      component: Tab2Page,
+  //      componentProps: {value: 1233}
+  //    });
+  //    myModal.present();
+  //  }
+  //  async presentModal() {
+  //   const modal = await this.modal.create({
+  //     component: Tab2Page,
+  //     componentProps: { value: 123 }
+  //   });
+  //   return await modal.present();
+  // }
+
+ async openTodoAlert(){
+   
+   let addTodoAlert = await this.alertCtrl.create({
+    message: "Enter your log changes:",
+    inputs: [{
+       type:"text", 
+       name:'addDesc',
+       placeholder:"Task Description"
+       
+     },
+     {
+      type:"date",
+      name:"startDate",
+      placeholder:"StartDate"
+    },
+    {
+      type:"date",
+      name:"endDate",
+      placeholder:"EndDate"
+    },{
+      type:"time",
+      name:'addStart',
+      placeholder:"Start Time"
+    },{
+       type:"time",
+       name:"addEnd",
+       placeholder:"End Time"
+     }],
+     buttons: [
+       {
+         text:"Cancel"
+       },{
+         text:"Save Changes",
+         handler: (alertData) =>{
+          this.changedDesc = alertData.addDesc;
+          console.log(this.changedDesc);
+          this.changedSDate = alertData.startDate;
+          this.changedEDate = alertData.endDate;
+          this.changedStart = alertData.addStart;
+          this.changedEnd = alertData.addEnd;
+          let editedId = this.test[0].id;
+          console.log(editedId);
+          var changedArray = {
+            Id: editedId,
+            Start: this.changedSDate,
+            Stop: this.changedEDate,
+            Description: this.changedDesc
+          }
+          // changedArray[0] = editedId;
+          // changedArray[1] = this.changedSDate;
+          // changedArray[2] = this.changedEDate;
+          // changedArray[3] = this.changedDesc;
+          // changedArray.push(editedId);
+          // changedArray.push(this.changedSDate);
+          // changedArray.push(this.changedEDate);
+          // changedArray.push(this.changedDesc);
+          
+          this.tab2service.UpdateLog(changedArray);
+          console.log(changedArray);
+        }
+       }
+     ]
+   });
+  addTodoAlert.present();
+  console.log(this.changedDesc);
+ }
+
+
+
+
+  //  ngOnInit() {
+  //   this.editForm = this.formBuilder.group({
+  //     Id: ["", [Validators.required]],
+  //     Start: ["", [Validators.required]],
+  //     Stop: ["", [Validators.required]],
+  //     Description: ["", [Validators.required]]
+
+  //   });
+  // }
+  onSubmit() {
+    this.tab2service.changeLog(this.editForm.value).subscribe();
+  }
+
+   edit(){
+   }
 
    projects: any;
 
