@@ -24,8 +24,9 @@
           </ion-select></ion-item> </ion-content>   
             <ion-content>
               <ion-item lines="none">{{tes.stop}}</ion-item></ion-content>
-          
-              <ion-button>EDIT</ion-button>
+              
+              <ion-button (click)="openTodoAlert()">EDIT</ion-button>
+              <!-- <button ion-button (click)="openModal()">Open Modal</button> -->
             </ion-item>
           </ion-item-group>
     </ion-list>
