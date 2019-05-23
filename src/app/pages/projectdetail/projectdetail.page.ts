@@ -14,34 +14,32 @@ export class ProjectdetailPage implements OnInit {
   @ViewChild('slides') slider: IonSlides;
   page = 0
   info;
-  logs = [];
+  logsprj = [];
   consultants = [];
   SwipedTabsIndicator :any= null;
   tabs:any=[];
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,public projectservice: ProjectService,private route: ActivatedRoute) {
-        this.assignProject();
      }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter (){
+    this.assignProject();
   }
   assignProject(){
     this.projectservice.getFullproject((data)=>{
         this.consultants = data.usersOnTheProject;
         this.info = {companynaam:data.company.name,bill:data.billable,inprogress:data.inProgress,projnaam:data.name,over:data.overtime}
-        this.logs = data.logs;
+        if(data.logs.length == 0){
+          this.logsprj = null;
+        }else{
+          this.logsprj = data.logs;
+        }
+        console.log(this.logsprj);
     },this.route.snapshot.paramMap.get('id'))
   }
-
-  totaaluren(){
-    let totaal;
-    for(let i = 0;i < this.logs.length; i++){
-        totaal += this.logs[i].stop.getTime() - this.logs[i].start.getTime();
-    }
-    console.log(totaal);
-    return totaal;
-  }
-
   segmentChanged(event){
     this.slider.slideTo(event.detail.value,400);
   }
@@ -51,4 +49,18 @@ export class ProjectdetailPage implements OnInit {
       this.page = data;
     })
   }
+
+  
+  //navigate to add users to a project page
+  goAddUsers() {
+    this.navCtrl.navigateForward("/add-user-to-project");
+    this.menuCtrl.close();
+  }
+
+  //navigate to remove users from a project page
+  goRemoveUsers() {
+    this.navCtrl.navigateForward("/remove-user-from-project");
+    this.menuCtrl.close();
+  }
+
 }

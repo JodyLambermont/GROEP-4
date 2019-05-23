@@ -55,7 +55,7 @@ export class AddUserToProjectPage implements OnInit {
             id:data[i]['id'],
             name:data[i]['name']
           }
-          this.personeel.push(personeelsCopy);
+        //  this.personeel.push(personeelsCopy);
           /*
           console.log("De projecten array: " + personeelsCopy.id);
           console.log("De projecten array: " + personeelsCopy.name);
