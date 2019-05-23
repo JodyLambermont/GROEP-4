@@ -122,10 +122,22 @@ export class SettingsService {
     });
   }
 
-  generateWeekBody(workweek, token){
-    var message = '{"id":"' + this.helper.decodeToken(token)["nameid"] + '","monday":{"id":"';
-    message += workweek.MaandagID + "";
+  generateWeekBody(ww, token){
+    //Het pijnigt me zoveel om het zo te schrijven, maar we zijn in enorm tijdtekort :(
+    var message = '{"id":"' + this.helper.decodeToken(token)["nameid"] + '",'
+    message +='"monday":{"id":"'+ww.MaandagId+'","start":"'+this.gd(ww.MaandagStart)+'","stop":"'+this.gd(ww.MaandagEinde)+'"},';
+    message +='"tuesday":{"id":"'+ww.DinsdagId+'","start":"'+this.gd(ww.DinsdagStart)+'","stop":"'+this.gd(ww.DinsdagEinde)+'"},';
+    message +='"wednesday":{"id":"'+ww.WoensdagId+'","start":"'+this.gd(ww.WoensdagStart)+'","stop":"'+this.gd(ww.WoensdagEinde)+'"},';
+    message +='"thursday":{"id":"'+ww.DonderdagId+'","start":"'+this.gd(ww.DonderdagStart)+'","stop":"'+this.gd(ww.DonderdagEinde)+'"},';
+    message +='"friday":{"id":"'+ww.VrijdagId+'","start":"'+this.gd(ww.VrijdagStart)+'","stop":"'+this.gd(ww.VrijdagEinde)+'"},';
+    message +='"saturday":{"id":"'+ww.ZaterdagId+'","start":"'+this.gd(ww.ZaterdagStart)+'","stop":"'+this.gd(ww.ZaterdagEinde)+'"},';
+    message +='"sunday":{"id":"'+ww.SundagId+'","start":"'+this.gd(ww.SundagStart)+'","stop":"'+this.gd(ww.SundagEinde)+'"}}';
     return message;
+  }
+
+  //GenerateDatetime from time
+  gd(string){
+    return "0001-01-01T" + string + ":00";
   }
 
   showAlert(msg) {
