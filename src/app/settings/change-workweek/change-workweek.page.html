@@ -12,7 +12,7 @@
 
     <ion-item>
       <ion-label>Maandag begin</ion-label>
-      <ion-input [value]="Werkweek.MaandagBegin" formControlName="MaandagBegin"></ion-input>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" [value]="Werkweek.MaandagBegin" formControlName="MaandagBegin"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Maandag einde</ion-label>
