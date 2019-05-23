@@ -32,7 +32,7 @@ export class AuthenticationService {
     private plt: Platform,
     private alertController: AlertController,
 
-    private toastController: ToastController
+    private toastController: ToastController,
 
     private router:Router,
 
