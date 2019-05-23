@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>RemoveUserFromProject</ion-title>
+    <ion-title>Verwijder personen van een project</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +18,7 @@
       <ion-list class="centerList">
         <ion-label>Selecteer personeel  om te verwijderen van een project</ion-label>
           <ion-select multiple="true" formControlName="UserIds">
-              <ion-select-option *ngFor="let persoon of personeel" [value]="persoon.id">{{ persoon.name }}</ion-select-option>
+              <ion-select-option *ngFor="let persoon of personeel" [value]="'id: ' + persoon.id">{{ persoon.name }}</ion-select-option>
         </ion-select>
       </ion-list>
 

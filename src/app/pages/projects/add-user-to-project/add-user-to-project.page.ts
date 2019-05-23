@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastController } from "@ionic/angular";
 import { LogService } from "../../../services/log.service";
 import { ConsultantService} from '../../../services/consultantAPI/consultant.service';
+import { UserService } from '../../../services/userAPI/user.service';
 import { Projects } from "../../../interfaces/projects";
 import { Consultant } from "../../consultants/consultant";
 
@@ -22,7 +23,8 @@ export class AddUserToProjectPage implements OnInit {
     public toastController: ToastController,
     private formBuilder: FormBuilder,
     private logService: LogService,
-    private consultantService: ConsultantService    
+    private consultantService: ConsultantService,
+    private userService: UserService
   ) {
     //get all projects in an array to use in html
     logService.GetAllProjects((data)=>{
@@ -72,7 +74,18 @@ export class AddUserToProjectPage implements OnInit {
 
   //submit all values (requires projectid and userid(s))
   personeelSubmit() {
-    console.log(this.personeelsForm.value);
+    //console.log(this.personeelsForm.value);
+    this.userService.SubmitAddPerson(this.personeelsForm.value);
+    this.presentToast();
   }
 
+
+  //Makes a popup when sent, no button required to close popup, will automatically close after duration : x (2000 = 2 sec)
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: "Succesvol toegevoegd aan het project!",
+      duration: 2000
+    });
+    toast.present();
+  }  
 }

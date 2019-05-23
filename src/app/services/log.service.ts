@@ -49,7 +49,7 @@ export class LogService {
       APIkey: this.APIKey
     });
     let request =  this.http
-    .post(`${this.url}/Log/Create`, logform, { headers: options }).subscribe(res=>{console.log(res)},err =>{console.log(err)});
+    .post(`${this.url}/Log/Create`, logform, { headers: options }).subscribe(res=>{console.log(res)},err =>{this.showAlert(err)});
   }
 
   showAlert(msg) {
