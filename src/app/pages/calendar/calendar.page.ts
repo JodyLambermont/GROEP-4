@@ -29,7 +29,7 @@ export class CalendarPage implements OnInit {
   }
 
   viewTitle = '';
-
+  
   items;
 
 @ViewChild(CalendarComponent) myCal:CalendarComponent;

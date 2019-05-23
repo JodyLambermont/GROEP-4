@@ -1,0 +1,23 @@
+export interface Workweek {
+    MaandagID: string,
+    MaandagBegin: string,
+    MaandagEinde: string,
+    DinsdagID: string,
+    DinsdagBegin: string,
+    DinsdagEinde: string,
+    WoensdagID: string,
+    WoensdagBegin: string,
+    WoensdagEinde: string,
+    DonderdagID: string,
+    DonderdagBegin: string,
+    DonderdagEinde: string,
+    VrijdagID: string,
+    VrijdagBegin: string,
+    VrijdagEinde: string,
+    ZaterdagID: string,
+    ZaterdagBegin: string,
+    ZaterdagEinde: string,
+    ZondagID: string,
+    ZondagBegin: string,
+    ZondagEinde: string
+}
