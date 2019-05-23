@@ -88,17 +88,18 @@ export class SettingsService {
     })
   }
 
-  async changeWorkweek(name, success){
+  async changeWorkweek(workweek, success){
+    
     let token = await this.storage.get("access_token");
-    name = JSON.stringify(name)
     var options = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
       APIKey: this.APIKey
     });
+    var message = this.generateWeekBody(workweek, token)
     let id = this.helper.decodeToken(token)["nameid"];
     return this.
-    http.post(`${this.url}/user/UpdateDefaultWorkWeek`, '{"id":"' + id+'",'+ name.substring(1), { headers: options }).subscribe((data)=>{
+    http.post(`${this.url}/user/UpdateDefaultWorkWeek`, message, { headers: options }).subscribe((data)=>{
       success(data),
       catchError(e => {
         this.showAlert(e.error.message);

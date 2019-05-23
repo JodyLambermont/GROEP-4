@@ -52,20 +52,20 @@ export class ChangeWorkweekPage implements OnInit {
 
   ngOnInit() {
     this.weekForm = this.formBuilder.group({
-      MaandagBegin: ["", ],
-      MaandagEinde: ["", ],
-      DinsdagBegin: ["", ],
-      DinsdagEinde: ["", ],
-      WoensdagBegin: ["", ],
-      WoensdagEinde: ["", ],
-      DonderdagBegin: ["", ],
-      DonderdagEinde: ["", ],
-      VrijdagBegin: ["", ],
-      VrijdagEinde: ["", ],
-      ZaterdagBegin: ["", ],
-      ZaterdagEinde: ["", ],
-      ZondagBegin: ["", ],
-      ZondagEinde: ["", ],
+      MaandagBegin: [""],
+      MaandagEinde: [""],
+      DinsdagBegin: [""],
+      DinsdagEinde: [""],
+      WoensdagBegin: [""],
+      WoensdagEinde: [""],
+      DonderdagBegin: [""],
+      DonderdagEinde: [""],
+      VrijdagBegin: [""],
+      VrijdagEinde: [""],
+      ZaterdagBegin: [""],
+      ZaterdagEinde: [""],
+      ZondagBegin: [""],
+      ZondagEinde: [""]
     });
   }
 
@@ -73,8 +73,25 @@ export class ChangeWorkweekPage implements OnInit {
     this.navCtrl.back();
   }
 
-  ngOnSubmit(){
-    //TODO changeWorkWeek
+  onSubmit(){
+    this.workweek.MaandagBegin = this.weekForm.controls["MaandagBegin"].value
+    this.workweek.MaandagEinde = this.weekForm.controls["MaandagEinde"].value
+    this.workweek.DinsdagBegin = this.weekForm.controls["DinsdagBegin"].value
+    this.workweek.DinsdagEinde = this.weekForm.controls["DinsdagEinde"].value
+    this.workweek.WoensdagBegin = this.weekForm.controls["WoensdagBegin"].value
+    this.workweek.WoensdagEinde = this.weekForm.controls["WoensdagEinde"].value
+    this.workweek.DonderdagBegin = this.weekForm.controls["DonderdagBegin"].value
+    this.workweek.DonderdagEinde = this.weekForm.controls["DonderdagEinde"].value
+    this.workweek.VrijdagBegin = this.weekForm.controls["VrijdagBegin"].value
+    this.workweek.VrijdagEinde = this.weekForm.controls["VrijdagEinde"].value
+    this.workweek.ZaterdagBegin = this.weekForm.controls["ZaterdagBegin"].value
+    this.workweek.ZaterdagEinde = this.weekForm.controls["ZaterdagEinde"].value
+    this.workweek.ZondagBegin = this.weekForm.controls["ZondagBegin"].value
+    this.workweek.ZondagEinde = this.weekForm.controls["ZondagEinde"].value
+    console.log(this.workweek);
+    this.settingsService.changeWorkweek(this.workweek, (data)=>{
+      console.log(data);
+    })
   }
 
 }
