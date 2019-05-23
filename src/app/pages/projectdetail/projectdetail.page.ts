@@ -37,7 +37,6 @@ export class ProjectdetailPage implements OnInit {
         }else{
           this.logsprj = data.logs;
         }
-        console.log(this.logsprj);
     },this.route.snapshot.paramMap.get('id'))
   }
   segmentChanged(event){

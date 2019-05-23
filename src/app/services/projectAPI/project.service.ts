@@ -19,7 +19,6 @@ export class ProjectService {
 
   async getProjects(success){
     let token = await this.storage.get('access_token')
-    console.log(token);
       var options = new HttpHeaders({
         "Content-Type": "application/json",
         APIkey: this.APIKey,
@@ -32,14 +31,12 @@ export class ProjectService {
         })
       );
       request.subscribe((data)=>{
-        console.log(data);
         success(data)
       });
   }
 
   async getFullproject(success,id){
     let token = await this.storage.get('access_token')
-    console.log(token);
       var options = new HttpHeaders({
         "Content-Type": "application/json",
         APIkey: this.APIKey,
@@ -52,14 +49,12 @@ export class ProjectService {
         })
       );
       request.subscribe((data)=>{
-        console.log(data);
         success(data)
       });
   }
 
   async editProject(success,prj){
     let token = await this.storage.get('access_token')
-    console.log(token);
       var options = new HttpHeaders({
         "Content-Type": "application/json",
         APIkey: this.APIKey,
