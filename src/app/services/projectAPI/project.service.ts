@@ -37,6 +37,26 @@ export class ProjectService {
       });
   }
 
+  async getFullproject(success,id){
+    let token = await this.storage.get('access_token')
+    console.log(token);
+      var options = new HttpHeaders({
+        "Content-Type": "application/json",
+        APIkey: this.APIKey,
+        "Authorization":"Bearer " + token,
+      });
+      let request = this.http.post(`${this.url}/Project/GetFull`,JSON.stringify({"Id":id}) ,{ headers: options }).pipe(
+        catchError(e => {
+          this.showAlert(e.error.message);
+          throw new Error(e);
+        })
+      );
+      request.subscribe((data)=>{
+        console.log(data);
+        success(data)
+      });
+  }
+
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,
