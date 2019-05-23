@@ -8,12 +8,15 @@
 </ion-header>
 
 <ion-content>
+    <ion-searchbar [(ngModel)]="searchq" (ionChange)="filter()"></ion-searchbar>
+    <div *ngIf="items.length">
         <ion-list>
-            <ion-list-header>
-                Consultants
-              </ion-list-header>
-                <ion-item *ngFor = "let item of consultants;" (click)="itemSelected(item)">
-                    {{ item.name }}
+                <ion-item *ngFor = "let item of items;" (click)="itemSelected(item)">
+                    <ion-label>{{ item.name }}</ion-label>
                 </ion-item>
         </ion-list>
+      </div>
+      <div *ngIf="items.length == 0">
+        <ion-item>Geen consultants</ion-item>
+      </div>
 </ion-content>
