@@ -51,18 +51,14 @@ export class AddUserToProjectPage implements OnInit {
     //get all consultants in an arrary to use in html
     consultantService.getConsultants((data)=>{
       for(var i =0;i < data.length;i++){
-          let personeelsCopy = {
-            id:data[i]['id'],
-            name:data[i]['name']
+        this.personeel.push(new Consultant(data[i].name,data[i].id,data[i].workMonth.salary,data[i].workMonth.accepted,data[i].workMonth.month,data[i].workMonth.totalHours))
           }
-          this.personeel.push(personeelsCopy);
           /*
           console.log("De projecten array: " + personeelsCopy.id);
           console.log("De projecten array: " + personeelsCopy.name);
           */
-        }
-      });
-    }
+        });
+      }
 
   ngOnInit() {
     //initialize the reactive form
