@@ -121,7 +121,7 @@ export class ConsultantdetailPage implements OnInit {
           },
           layout: 'noBorders'
         },
-        {text: 'headerLineOnly:', fontSize: 14, bold: true, margin: [0, 20, 0, 8]},
+        {text: 'Factuur:', fontSize: 14, bold: true, margin: [0, 20, 0, 8]},
         {
           style: 'tableExample',
           table: {
