@@ -3,6 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
 import { ResolveService } from '../app/services/consultantAPI/resolve.service'
 
+//Every route (but login) can activate the authentication guard
+//Access is only granted once a user has a valid jwt token and which is not expired
 const routes: Routes = [
   {
     path: "",
@@ -74,13 +76,13 @@ const routes: Routes = [
     resolve: { 
       special: ResolveService
     },
-    loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule' },
-  { path: 'projects', loadChildren: './pages/projects/projects.module#ProjectsPageModule' },
-  { path: 'add-project', loadChildren: './pages/add-project/add-project.module#AddProjectPageModule' },
-  { path: 'change-project/:id', loadChildren: './pages/change-project/change-project.module#ChangeProjectPageModule' },
-  { path: 'add-user-to-project', loadChildren: './pages/projects/add-user-to-project/add-user-to-project.module#AddUserToProjectPageModule' },
-   { path: 'projectdetail/:id', loadChildren: './pages/projectdetail/projectdetail.module#ProjectdetailPageModule' },
-  { path: 'remove-user-from-project', loadChildren: './pages/projects/remove-user-from-project/remove-user-from-project.module#RemoveUserFromProjectPageModule' }
+    loadChildren: './pages/consultantdetail/consultantdetail.module#ConsultantdetailPageModule', canActivate: [AuthGuard] },
+  { path: 'projects', loadChildren: './pages/projects/projects.module#ProjectsPageModule', canActivate: [AuthGuard] },
+  { path: 'add-project', loadChildren: './pages/add-project/add-project.module#AddProjectPageModule', canActivate: [AuthGuard] },
+  { path: 'change-project/:id', loadChildren: './pages/change-project/change-project.module#ChangeProjectPageModule', canActivate: [AuthGuard] },
+  { path: 'add-user-to-project', loadChildren: './pages/projects/add-user-to-project/add-user-to-project.module#AddUserToProjectPageModule', canActivate: [AuthGuard] },
+  { path: 'projectdetail/:id', loadChildren: './pages/projectdetail/projectdetail.module#ProjectdetailPageModule', canActivate: [AuthGuard] },
+  { path: 'remove-user-from-project', loadChildren: './pages/projects/remove-user-from-project/remove-user-from-project.module#RemoveUserFromProjectPageModule', canActivate: [AuthGuard] }
 
 
 
