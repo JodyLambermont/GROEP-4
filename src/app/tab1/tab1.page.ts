@@ -13,7 +13,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class Tab1Page implements OnInit {
   logForm: FormGroup;
-  projects : Promise<any>;
+  //projects : Promise<any>;
   protected projecten : Projects[] = []; 
   //private projectsObservable : Observable<Projects[]> ;
 
@@ -53,7 +53,7 @@ export class Tab1Page implements OnInit {
   }
 
   logSubmit() {
-    console.log(this.logForm.value);
+    //console.log(this.logForm.value);
     this.logService.SubmitLog(this.logForm.value);
     this.presentToast();
   }

@@ -42,4 +42,19 @@ export class ProjectsPage implements OnInit {
   }
 
 
+
+
+  //navigate to add users to a project page
+  goAddUsers() {
+    this.navCtrl.navigateForward("/add-user-to-project");
+    this.menuCtrl.close();
+  }
+
+  //navigate to remove users from a project page
+  goRemoveUsers() {
+    this.navCtrl.navigateForward("/remove-user-from-project");
+    this.menuCtrl.close();
+  }
+
+
 }

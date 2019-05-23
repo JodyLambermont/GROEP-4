@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>projects</ion-title>
-    <ion-buttons slot="start">
+    <ion-title>projecten</ion-title>
+      <ion-button (click)="goAddUsers()">Voeg personeel toe aan een project</ion-button>
+      <ion-button (click)="goRemoveUsers()">Verwijder personeel van een project</ion-button>
+      <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
