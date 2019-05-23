@@ -56,6 +56,24 @@ export class ConsultantService {
       });
   }
 
+  async updateWorkMonth(success,id,accept){
+    let token = await this.storage.get('access_token')
+      var options = new HttpHeaders({
+        "Content-Type": "application/json",
+        APIkey: this.APIKey,
+        "Authorization":"Bearer " + token,
+      });
+      let request = this.http.post(`${this.url}/User/UpdateWorkMonth`,JSON.stringify({"Id":id,"Accepted":accept}), { headers: options }).pipe(
+        catchError(e => {
+          this.showAlert(e.error.message);
+          throw new Error(e);
+        })
+      );
+      request.subscribe((data)=>{
+        success(data)
+      });
+  }
+
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,
