@@ -21,7 +21,7 @@
   </ion-card>
   <ion-card>
     <ion-card-header (click)="toggleDetails(showDetails)">
-      <ion-card-title>{{ consultant.name }}</ion-card-title>
+      <ion-card-title>Info: {{ consultant.name }}</ion-card-title>
       <div class="ion-float-right">      
           <ion-icon color="primary" name="arrow-dropdown" float-right large></ion-icon>
         </div>
@@ -48,7 +48,7 @@
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Maandloon januari 2019</ion-card-title>
+      <ion-card-title>Maandloon {{ monthcurrent | date: "MMMM-yyyy" }}</ion-card-title>
       <ion-card-subtitle color="danger">{{ salary }}</ion-card-subtitle>
       <div *ngIf="accepted">
           <ion-card-subtitle color="green">Geacepteerd</ion-card-subtitle>
@@ -59,10 +59,10 @@
     </ion-card-header>
   
     <ion-card-content>
-        <div *ngIf="accepted && datenow">
+        <div *ngIf="accepted && consultant.workMonth != null">
             <ion-button side="right" color="danger" (click)="deny()">Weigeren</ion-button>
         </div>
-        <div *ngIf="!accepted">
+        <div *ngIf="!accepted && consultant.workMonth != null">
             <ion-button side="left" color="primary" (click)="accept()">Accepteer</ion-button>
         </div>
     </ion-card-content>

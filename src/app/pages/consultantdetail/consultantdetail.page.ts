@@ -29,6 +29,7 @@ export class ConsultantdetailPage implements OnInit {
   showLogs = false;
   accepted = false;
   datenow = true;
+  monthcurrent = new Date().toISOString();
   date = new Date().toISOString();
   constructor(private logService:LogService ,private consultantservice:ConsultantService,private route: ActivatedRoute, public navCtrl: NavController, private plt: Platform, private file: File, private fileOpener: FileOpener) {
     this.consultant = this.assignConsultantDetail(Date.now);
@@ -42,7 +43,6 @@ export class ConsultantdetailPage implements OnInit {
 
   assignConsultantDetail(month){
     return this.consultantservice.getConsultantDetail((data)=>{
-      console.log(data);
       this.consultant = data;
       if(data.workMonth != null){
         this.uren = data.workMonth.totalHours;
@@ -53,6 +53,7 @@ export class ConsultantdetailPage implements OnInit {
         this.uren = "0";
         this.accepted = false;
       }
+      this.logs = []
       if(data.logIds != null){
         for(let i = 0;i < data.logIds.length; i++){
           this.logService.getLogonid((data)=>{
@@ -64,6 +65,7 @@ export class ConsultantdetailPage implements OnInit {
   }
 
   onMonthChange(input){
+    this.monthcurrent = input.detail.value
     if(input.detail.value < this.date){
       this.datenow = false;
     }
