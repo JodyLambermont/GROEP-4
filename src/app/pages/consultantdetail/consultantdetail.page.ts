@@ -9,6 +9,7 @@ import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer/ng
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { ConsultantService } from '../../services/consultantAPI/consultant.service';
+import { LogService } from '../../services/log.service'
 
 "https://ionicacademy.com/create-pdf-files-ionic-pdfmake/"
 "https://codepen.io/ionic/pen/uJkCz"
@@ -23,10 +24,13 @@ export class ConsultantdetailPage implements OnInit {
   consultant: any;
   logs = [];
   uren = "0";
+  salary = "€0,0";
   showDetails = false;
   showLogs = false;
+  accepted = false;
+  datenow = true;
   date = new Date().toISOString();
-  constructor(private consultantservice:ConsultantService,private route: ActivatedRoute, public navCtrl: NavController, private plt: Platform, private file: File, private fileOpener: FileOpener) {
+  constructor(private logService:LogService ,private consultantservice:ConsultantService,private route: ActivatedRoute, public navCtrl: NavController, private plt: Platform, private file: File, private fileOpener: FileOpener) {
     this.consultant = this.assignConsultantDetail(Date.now);
   }
 
@@ -42,14 +46,46 @@ export class ConsultantdetailPage implements OnInit {
       this.consultant = data;
       if(data.workMonth != null){
         this.uren = data.workMonth.totalHours;
+        this.salary = data.workMonth.salary;
+        this.accepted = data.workMonth.accepted;
       }else{
+        this.salary = "€0,0";
         this.uren = "0";
+        this.accepted = false;
+      }
+      if(data.logIds != null){
+        for(let i = 0;i < data.logIds.length; i++){
+          this.logService.getLogonid((data)=>{
+              this.logs.push(data);
+          },data.logIds[i]);
+        }
       }
     },this.route.snapshot.paramMap.get('id'),month);
   }
 
   onMonthChange(input){
+    if(input.detail.value < this.date){
+      this.datenow = false;
+    }
     this.consultant = this.assignConsultantDetail(input.detail.value);
+  }
+
+  accept(){
+    if(this.consultant.workMonth != null){
+      this.consultantservice.updateWorkMonth((data)=>{
+        console.log(data);
+          this.accepted = true;
+      },this.consultant.workMonth.id,true);
+    }
+  }
+
+  deny(){
+    if(this.consultant.workMonth != null){
+      this.consultantservice.updateWorkMonth((data)=>{
+        console.log(data);
+          this.accepted = false;
+      },this.consultant.workMonth.id,false);
+    }
   }
 
   toggleDetails(data){
