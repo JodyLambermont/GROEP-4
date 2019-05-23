@@ -43,7 +43,7 @@ export class ChangeWorkweekPage implements OnInit {
           ZaterdagEinde:data['saturday']['start'].substring(11,16),
           ZondagID:data['sunday']['id'],
           ZondagBegin:data['sunday']['start'].substring(11,16),
-          ZondagEinde:data['sunday']['start'].substring(11,16),
+          ZondagEinde:data['sunday']['start'].substring(11,16)
         }
         this.workweek = workweekCopy;
         console.log(this.workweek)
@@ -71,6 +71,10 @@ export class ChangeWorkweekPage implements OnInit {
 
   goBack(){
     this.navCtrl.back();
+  }
+
+  ngOnSubmit(){
+    //TODO changeWorkWeek
   }
 
 }
