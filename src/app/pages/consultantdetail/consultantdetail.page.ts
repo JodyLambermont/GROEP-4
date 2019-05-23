@@ -115,10 +115,8 @@ export class ConsultantdetailPage implements OnInit {
           table: {
             headerRows: 1,
             body: [
-              [{ text: 'Company ', style: 'header' }],
-              [{ text: 'Adres: straat 123, 1000 Antwerpen'}],
-              [{ text: 'Naam consultant: Arne Mergan'}],
-              [ { text: 'Datum: 17/05/2019 15:00'}],
+              [{ text: 'Naam consultant: ' + this.consultant.name} ],
+              [ { text: 'Datum: ' + new Date().toISOString() }],
             ]
           },
           layout: 'noBorders'
@@ -129,12 +127,8 @@ export class ConsultantdetailPage implements OnInit {
           table: {
             headerRows: 1,
             body: [
-              [{text: 'Header 1', style: 'tableHeader'}, {text: 'Header 2', style: 'tableHeader'}, {text: 'Header 3', style: 'tableHeader'}],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
+              [{text: 'Salaris', style: 'tableHeader'}, {text: 'Aantal uren gewerkt', style: 'tableHeader'}],
+              [this.salary, this.uren],
             ]
           },
           layout: 'headerLineOnly'

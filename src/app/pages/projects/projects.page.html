@@ -9,13 +9,13 @@
 
 <ion-content padding>
   <ion-list>
-        <ion-item-sliding *ngFor = "let item of projects;">
-            <ion-item (click)="itemSelected(item)">
+    <div *ngIf="projects != null">
+        <ion-item *ngFor = "let item of projects;" (click)="itemSelected(item)">
                 {{ item.name }}
             </ion-item>
-            <ion-item-options side="end">
-              <ion-button (click)="edit(item)">Edit</ion-button>
-            </ion-item-options>
-          </ion-item-sliding>
+        </div>
+        <div *ngIf="projects == null">
+            <ion-item>Geen projecten</ion-item>
+        </div>
 </ion-list>
 </ion-content>

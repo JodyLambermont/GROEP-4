@@ -8,7 +8,6 @@
     <ion-content>
       <ion-list>
         <ion-item (click)='goHome()'>Home</ion-item>
-        <ion-item (click)='goProfile()'>Profiel</ion-item>
         <div *ngFor="let page of pages">
           <ion-item (click)='goPage(page.link)'>{{ page.title }}</ion-item>
         </div>
