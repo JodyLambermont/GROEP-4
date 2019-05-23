@@ -20,12 +20,12 @@
     <ion-list class="centerList">
       <ion-item lines="none">
         <ion-label position="stacked">Startuur</ion-label>
-        <ion-datetime   formControlName="Start" display-format="DD-MM-YYYY HH:mm" picker-format="DD-MM-YYYY HH:mm"></ion-datetime >
+        <ion-datetime   formControlName="Start" placeholder="klik hier" display-format="DD-MM-YYYY HH:mm" picker-format="DD-MM-YYYY HH:mm"></ion-datetime >
       </ion-item>
 
       <ion-item lines="none">
         <ion-label position="stacked">Einduur</ion-label>
-        <ion-datetime   formControlName="Stop" display-format="DD-MM-YYYY HH:mm" picker-format="DD-MM-YYYY HH:mm"></ion-datetime >
+        <ion-datetime   formControlName="Stop" placeholder="klik hier" display-format="DD-MM-YYYY HH:mm" picker-format="DD-MM-YYYY HH:mm"></ion-datetime >
       </ion-item>
     </ion-list>
 
@@ -37,10 +37,11 @@
 
     <ion-list class="centerList">
       <ion-label>Selecteer uw project</ion-label>
-        <ion-select formControlName="ProjectId">
+      <ion-select formControlName="ProjectId">
             <ion-select-option *ngFor="let project of projecten" [value]="project.id">{{ project.name }}</ion-select-option>
-          </ion-select>
+      </ion-select>
     </ion-list>
+    
     <br />
     <br />
 
