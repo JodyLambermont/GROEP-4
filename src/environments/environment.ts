@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  // required credentials for api calls + server access
   url: "https://ehbpmagroup6.azurewebsites.net",
   APIKey: "pHtBjEj0Y1d1gnSbxGDAEDUQoQuvsOa3I4snAi5QoLKrHTvJMxbl1Wk5CLhQ8uu7"
 };

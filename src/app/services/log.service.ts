@@ -21,6 +21,7 @@ export class LogService {
   ) {}
 
   //   /Project/GetList ->API sends all projects ID, name and only those that are in progress // this is used to display in the frontend
+  //every single api call uses a secury api key + bearer token for security reasons
     async GetAllProjects(success) {
     let token = await this.storage.get("access_token");
     var options = new HttpHeaders({

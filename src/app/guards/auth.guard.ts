@@ -11,6 +11,7 @@ import { delay } from 'rxjs/operators';
 export class AuthGuard implements CanActivate {
   constructor(private auth: AuthenticationService, private router: Router, private alerter: AlertController ) {}
 
+  //check authenticated state for further access to next pages (check is automatically every page, otherwise redirected to login)
   canActivate(/*next: ActivatedRouteSnapshot*/): boolean {
     /*const roles = next.firstChild.data['roles'] as Array<string>;
     if(roles){

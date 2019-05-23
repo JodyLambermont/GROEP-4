@@ -43,6 +43,7 @@ export class Tab1Page implements OnInit {
     }}
     );
   }
+  //validators from the form (html has button disabled until all valid)
   ngOnInit() {
     this.logForm = this.formBuilder.group({
       Start: ["", [Validators.required]],
@@ -52,6 +53,7 @@ export class Tab1Page implements OnInit {
     });
   }
 
+  //submit data from reactive form with api call
   logSubmit() {
     //console.log(this.logForm.value);
     this.logService.SubmitLog(this.logForm.value);
