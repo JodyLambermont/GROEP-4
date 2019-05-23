@@ -1,8 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>projecten</ion-title>
-      <ion-button (click)="goAddUsers()">Voeg personeel toe aan een project</ion-button>
-      <ion-button (click)="goRemoveUsers()">Verwijder personeel van een project</ion-button>
       <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
@@ -11,8 +9,13 @@
 
 <ion-content padding>
   <ion-list>
-        <ion-item *ngFor = "let item of projects;" (click)="itemSelected(item)">
-            {{ item.name }}
-        </ion-item>
+        <ion-item-sliding *ngFor = "let item of projects;">
+            <ion-item (click)="itemSelected(item)">
+                {{ item.name }}
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-button (click)="edit(item)">Edit</ion-button>
+            </ion-item-options>
+          </ion-item-sliding>
 </ion-list>
 </ion-content>

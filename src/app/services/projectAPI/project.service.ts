@@ -57,6 +57,31 @@ export class ProjectService {
       });
   }
 
+  async editProject(success,prj){
+    let token = await this.storage.get('access_token')
+    console.log(token);
+      var options = new HttpHeaders({
+        "Content-Type": "application/json",
+        APIkey: this.APIKey,
+        "Authorization":"Bearer " + token,
+      });
+      let request = this.http.post(`${this.url}/Project/GetFull`,JSON.stringify(  {
+        "Id": prj.id,
+        "Name": prj.Name,
+        "CompanyId": "9c514f27-fe7a-4dd3-91fa-3bd5f4a1125c",
+        "Overtime": prj.Overtime,
+        "Billable": prj.Billable
+      }) ,{ headers: options }).pipe(
+        catchError(e => {
+          this.showAlert(e.error.message);
+          throw new Error(e);
+        })
+      );
+      request.subscribe((data)=>{
+        console.log(data);
+        success(data)
+      });
+  }
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,

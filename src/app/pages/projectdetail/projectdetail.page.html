@@ -22,11 +22,18 @@
 
   <ion-slides #slides [options]="slideOptions" (ionSlideDidChange)="slideChanged($event)">
     <ion-slide id="0">
+        <div *ngIf="consultants != null">
           <ion-list>
             <ion-item *ngFor="let co of consultants">
                 {{ co.name }}
             </ion-item>
+            <ion-button (click)="goAddUsers()" expand="block">Voeg personeel toe</ion-button>
+            <ion-button (click)="goRemoveUsers()" expand="block">Verwijder personeel</ion-button>
           </ion-list>
+        </div>
+          <div *ngIf="consultants == null">
+              <ion-item>Geen consultants</ion-item>
+            </div>
     </ion-slide>
     <ion-slide id="1">
           <ion-card>
@@ -53,16 +60,20 @@
               <div *ngIf="!info.over">
                   <ion-item><b>Overuren:</b>&nbsp;  Nee</ion-item>
               </div>
-              <ion-item><b>Totaal uren: </b> {{ totaaluren() }}</ion-item>
             </ion-card-content>
           </ion-card>
     </ion-slide>
     <ion-slide id="2">
+        <div *ngIf="logsprj != null">
           <ion-list>
-              <ion-item *ngFor="let lo of logs">
+              <ion-item *ngFor="let lo of logsprj">
                   {{ lo.description }} : {{ lo.start | date: "dd/MM/yyyy H:mm"   }} - {{ lo.stop  | date: "dd/MM/yyyy H:mm"  }}
               </ion-item>
             </ion-list>
-    </ion-slide>
+          </div>
+          <div *ngIf="logsprj == null">
+            <ion-list><ion-item>Geen logs</ion-item></ion-list>
+          </div>
+        </ion-slide>
   </ion-slides>
 </ion-content>

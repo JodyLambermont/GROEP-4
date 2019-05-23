@@ -56,5 +56,10 @@ export class ProjectsPage implements OnInit {
     this.menuCtrl.close();
   }
 
+  edit(item){
+    this.navCtrl.navigateForward("/change-project/"+item.id);
+    this.menuCtrl.close();
+  }
+
 
 }

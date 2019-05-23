@@ -55,6 +55,9 @@ export class AddUserToProjectPage implements OnInit {
       for(var i =0;i < data.length;i++){
         this.personeel.push(new Consultant(data[i].name,data[i].id,data[i].workMonth.salary,data[i].workMonth.accepted,data[i].workMonth.month,data[i].workMonth.totalHours))
           }
+
+        //  this.personeel.push(personeelsCopy);
+
           /*
           console.log("De projecten array: " + personeelsCopy.id);
           console.log("De projecten array: " + personeelsCopy.name);
