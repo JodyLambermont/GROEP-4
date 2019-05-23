@@ -25,8 +25,9 @@ export class ConsultantsPage implements OnInit {
  
   assignConsultants() {
     this.consultantService.getConsultants((data)=>{
+      console.log(data);
       for(var i =0;i < data.length;i++){
-          this.consultants.push(new Consultant(data[i].name,data[i].id))
+          this.consultants.push(new Consultant(data[i].name,data[i].id,data[i].workMonth.salary,data[i].workMonth.accepted,data[i].workMonth.month,data[i].workMonth.totalHours))
       }
     });
     this.items = this.consultants;

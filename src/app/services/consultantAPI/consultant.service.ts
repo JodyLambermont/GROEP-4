@@ -38,14 +38,14 @@ export class ConsultantService {
       });
   }
 
-  async getConsultantsonid(success,id){
+  async getConsultantDetail(success,id,month){
     let token = await this.storage.get('access_token')
       var options = new HttpHeaders({
         "Content-Type": "application/json",
         APIkey: this.APIKey,
         "Authorization":"Bearer " + token,
       });
-      let request = this.http.post(`${this.url}/User/Get`,JSON.stringify({"Id":id}), { headers: options }).pipe(
+      let request = this.http.post(`${this.url}/User/Get`,JSON.stringify({"Id":id,"Month":month}), { headers: options }).pipe(
         catchError(e => {
           this.showAlert(e.error.message);
           throw new Error(e);
