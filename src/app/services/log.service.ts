@@ -38,7 +38,6 @@ export class LogService {
       );
       request.subscribe((data=>{success(data)}));
   }
-
   //   /Log/Create -> API, submit the data to the api with the values fetched from the formgroup
   async SubmitLog(logform) {
     logform = JSON.stringify(logform);
@@ -50,7 +49,27 @@ export class LogService {
       APIkey: this.APIKey
     });
     let request =  this.http
-    .post(`${this.url}/Log/Create`, logform, { headers: options }).subscribe(res=>{console.log(res)},err =>{console.log(err)});
+    .post(`${this.url}/Log/Create`, logform, { headers: options }).subscribe(res=>{console.log(res)},err =>{this.showAlert(err)});
+  }
+
+  
+  async getLogonid(success,id){
+    let token = await this.storage.get('access_token')
+      var options = new HttpHeaders({
+        "Content-Type": "application/json",
+        APIkey: this.APIKey,
+        "Authorization":"Bearer " + token,
+      });
+      let request = this.http.get(`${this.url}/Log/get?Id=${id}`, { headers: options }).pipe(
+        catchError(e => {
+          this.showAlert(e.error.message);
+          throw new Error(e);
+        })
+      );
+      request.subscribe((data)=>{
+        console.log(data);
+        success(data)
+      });
   }
 
   showAlert(msg) {

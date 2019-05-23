@@ -8,10 +8,68 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item>Naam: {{ consultant.name }}</ion-item>
-  <ion-item>Maandloon januari 2019: 2008 euro</ion-item>
-  <ion-button expand="block" color="secondary">Timesheet januari 2019</ion-button>
- <ion-button expand="block" color="primary">Accepteer</ion-button>
- <ion-button expand="block" color="secondary">Niet Accepteer </ion-button>
- <ion-button expand="block" (click)="downloadPDF()" color="danger">Download pdf</ion-button>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Kies maand</ion-card-title>
+      </ion-card-header>
+    <ion-card-content>
+        <ion-item>
+            <ion-label >Maand</ion-label>
+            <ion-datetime display-format="MMMM-YYYY" picker-format="MMMM-YYYY" (ionChange)="onMonthChange($event)" [(ngModel)]="date" ></ion-datetime >
+        </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header (click)="toggleDetails(showDetails)">
+      <ion-card-title>Info: {{ consultant.name }}</ion-card-title>
+      <div class="ion-float-right">      
+          <ion-icon color="primary" name="arrow-dropdown" float-right large></ion-icon>
+        </div>
+    </ion-card-header>
+  
+    <ion-card-content *ngIf="showDetails">
+      <ion-item>Email: {{ consultant.email }}</ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header (click)="toggleLogs(showLogs)">
+      <ion-card-title>Log rapport</ion-card-title>
+      <div class="ion-float-right">      
+        <ion-icon color="primary" name="arrow-dropdown" float-right large></ion-icon>
+      </div>
+    </ion-card-header>
+  
+    <ion-card-content *ngIf="showLogs">
+      <ion-item>Gepresteerde uren: {{ uren }}</ion-item>
+        <ion-list *ngFor="let item of logs">
+          <ion-item>{{ item.description }} : {{ item.start | date: "dd/MM/yyyy H:mm"   }} - {{ item.stop  | date: "dd/MM/yyyy H:mm"  }}</ion-item>
+        </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Maandloon {{ monthcurrent | date: "MMMM-yyyy" }}</ion-card-title>
+      <ion-card-subtitle color="danger">{{ salary }}</ion-card-subtitle>
+      <div *ngIf="accepted">
+          <ion-card-subtitle color="green">Geacepteerd</ion-card-subtitle>
+      </div>
+      <div *ngIf="!accepted">
+          <ion-card-subtitle color="danger">Niet Geacepteerd</ion-card-subtitle>
+      </div>
+    </ion-card-header>
+  
+    <ion-card-content>
+        <div *ngIf="accepted && consultant.workMonth != null">
+            <ion-button side="right" color="danger" (click)="deny()">Weigeren</ion-button>
+        </div>
+        <div *ngIf="!accepted && consultant.workMonth != null">
+            <ion-button side="left" color="primary" (click)="accept()">Accepteer</ion-button>
+        </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+      <ion-card-header>
+        <ion-button expand="block" (click)="downloadPDF()" color="danger">Download pdf</ion-button>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

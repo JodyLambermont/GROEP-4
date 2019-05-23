@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+    <ion-title>projectdetail</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-segment [(ngModel)]="page" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="0" selected>
+          <ion-label>Consultants</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="1">
+          <ion-label>Info</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="2">
+            <ion-label>Logs</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+  <ion-slides #slides [options]="slideOptions" (ionSlideDidChange)="slideChanged($event)">
+    <ion-slide id="0">
+        <div *ngIf="consultants != null">
+          <ion-list>
+            <ion-item *ngFor="let co of consultants">
+                {{ co.name }}
+            </ion-item>
+            <ion-button (click)="goAddUsers()" expand="block">Voeg personeel toe</ion-button>
+            <ion-button (click)="goRemoveUsers()" expand="block">Verwijder personeel</ion-button>
+          </ion-list>
+        </div>
+          <div *ngIf="consultants == null">
+              <ion-item>Geen consultants</ion-item>
+            </div>
+    </ion-slide>
+    <ion-slide id="1">
+          <ion-card>
+            <ion-card-header>
+                <ion-card-title>{{ info.projnaam }}</ion-card-title>
+                <ion-card-subtitle>Bedrijf: {{ info.companynaam }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <div *ngIf="info.inprogress">
+                  <ion-item><b>Status:</b>&nbsp;  Nog bezig</ion-item>
+              </div>
+              <div *ngIf="!info.inprogress">
+                  <ion-item><b>Status:</b> &nbsp; Afgesloten</ion-item>
+              </div>
+              <div *ngIf="info.bill">
+                  <ion-item><b>factureerbaar:</b> &nbsp;Ja</ion-item>
+              </div>
+              <div *ngIf="!info.bill">
+                  <ion-item><b>factureerbaar:</b>&nbsp;  Nee</ion-item>
+              </div>
+              <div *ngIf="info.over">
+                  <ion-item><b>Overuren:</b> &nbsp; Ja</ion-item>
+              </div>
+              <div *ngIf="!info.over">
+                  <ion-item><b>Overuren:</b>&nbsp;  Nee</ion-item>
+              </div>
+            </ion-card-content>
+          </ion-card>
+    </ion-slide>
+    <ion-slide id="2">
+        <div *ngIf="logsprj != null">
+          <ion-list>
+              <ion-item *ngFor="let lo of logsprj">
+                  {{ lo.description }} : {{ lo.start | date: "dd/MM/yyyy H:mm"   }} - {{ lo.stop  | date: "dd/MM/yyyy H:mm"  }}
+              </ion-item>
+            </ion-list>
+          </div>
+          <div *ngIf="logsprj == null">
+            <ion-list><ion-item>Geen logs</ion-item></ion-list>
+          </div>
+        </ion-slide>
+  </ion-slides>
+</ion-content>

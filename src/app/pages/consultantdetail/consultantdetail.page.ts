@@ -8,8 +8,11 @@ import { NavController, Platform } from '@ionic/angular';
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer/ngx";
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { ConsultantService } from '../../services/consultantAPI/consultant.service';
+import { LogService } from '../../services/log.service'
 
 "https://ionicacademy.com/create-pdf-files-ionic-pdfmake/"
+"https://codepen.io/ionic/pen/uJkCz"
 
 @Component({
   selector: 'app-consultantdetail',
@@ -19,13 +22,87 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 export class ConsultantdetailPage implements OnInit {
   pdfObj = null;
   consultant: any;
-  constructor(private route: ActivatedRoute, public navCtrl: NavController, private plt: Platform, private file: File, private fileOpener: FileOpener) {
-    //this.consultant = JSON.parse(this.route.snapshot.paramMap.get('obj')) as Consultant;
+  logs = [];
+  uren = "0";
+  salary = "€0,0";
+  showDetails = false;
+  showLogs = false;
+  accepted = false;
+  datenow = true;
+  monthcurrent = new Date().toISOString();
+  date = new Date().toISOString();
+  constructor(private logService:LogService ,private consultantservice:ConsultantService,private route: ActivatedRoute, public navCtrl: NavController, private plt: Platform, private file: File, private fileOpener: FileOpener) {
+    this.consultant = this.assignConsultantDetail(Date.now);
   }
 
   ngOnInit() {
-    if(this.route.snapshot.data['special']){
+    /*if(this.route.snapshot.data['special']){
       this.consultant = this.route.snapshot.data['special'];
+  }*/
+  }
+
+  assignConsultantDetail(month){
+    return this.consultantservice.getConsultantDetail((data)=>{
+      this.consultant = data;
+      if(data.workMonth != null){
+        this.uren = data.workMonth.totalHours;
+        this.salary = data.workMonth.salary;
+        this.accepted = data.workMonth.accepted;
+      }else{
+        this.salary = "€0,0";
+        this.uren = "0";
+        this.accepted = false;
+      }
+      this.logs = []
+      if(data.logIds != null){
+        for(let i = 0;i < data.logIds.length; i++){
+          this.logService.getLogonid((data)=>{
+              this.logs.push(data);
+          },data.logIds[i]);
+        }
+      }
+    },this.route.snapshot.paramMap.get('id'),month);
+  }
+
+  onMonthChange(input){
+    this.monthcurrent = input.detail.value
+    if(input.detail.value < this.date){
+      this.datenow = false;
+    }
+    this.consultant = this.assignConsultantDetail(input.detail.value);
+  }
+
+  accept(){
+    if(this.consultant.workMonth != null){
+      this.consultantservice.updateWorkMonth((data)=>{
+        console.log(data);
+          this.accepted = true;
+      },this.consultant.workMonth.id,true);
+    }
+  }
+
+  deny(){
+    if(this.consultant.workMonth != null){
+      this.consultantservice.updateWorkMonth((data)=>{
+        console.log(data);
+          this.accepted = false;
+      },this.consultant.workMonth.id,false);
+    }
+  }
+
+  toggleDetails(data){
+      if(data == false){
+        this.showDetails = true
+      }else{
+        this.showDetails = false
+      }
+  }
+
+  toggleLogs(data){
+    if(data == false){
+      this.showLogs = true
+    }else{
+      this.showLogs = false
     }
   }
 
@@ -38,10 +115,8 @@ export class ConsultantdetailPage implements OnInit {
           table: {
             headerRows: 1,
             body: [
-              [{ text: 'Company ', style: 'header' }],
-              [{ text: 'Adres: straat 123, 1000 Antwerpen'}],
-              [{ text: 'Naam consultant: Arne Mergan'}],
-              [ { text: 'Datum: 17/05/2019 15:00'}],
+              [{ text: 'Naam consultant: ' + this.consultant.name} ],
+              [ { text: 'Datum: ' + new Date().toISOString() }],
             ]
           },
           layout: 'noBorders'
@@ -52,12 +127,8 @@ export class ConsultantdetailPage implements OnInit {
           table: {
             headerRows: 1,
             body: [
-              [{text: 'Header 1', style: 'tableHeader'}, {text: 'Header 2', style: 'tableHeader'}, {text: 'Header 3', style: 'tableHeader'}],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-              ['Sample value 1', 'Sample value 2', 'Sample value 3'],
+              [{text: 'Salaris', style: 'tableHeader'}, {text: 'Aantal uren gewerkt', style: 'tableHeader'}],
+              [this.salary, this.uren],
             ]
           },
           layout: 'headerLineOnly'

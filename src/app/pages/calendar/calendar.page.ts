@@ -34,22 +34,26 @@ export class CalendarPage implements OnInit {
 
 @ViewChild(CalendarComponent) myCal:CalendarComponent;
   constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string,private calendarservice: CalendarService) {
-      calendarservice.getLogs((data)=>{
-        for(var i =0;i < data.length;i++){
-          let eventCopy = {
-            title:data[i]['description'],
-            startTime:new Date(data[i]['start']),
-            endTime:new Date(data[i]['stop']),
-            allDay:false
-          }
-          this.eventSource.push(eventCopy);
-        }
-        this.myCal.loadEvents();
-        this.resetEvent();
-      });
    }
 
-  ngOnInit() {
+   ionViewWillEnter (){
+    this.calendarservice.getLogs((data)=>{
+      this.eventSource = []
+      for(var i =0;i < data.length;i++){
+        let eventCopy = {
+          title:data[i]['description'],
+          startTime:new Date(data[i]['start']),
+          endTime:new Date(data[i]['stop']),
+          allDay:false
+        }
+        this.eventSource.push(eventCopy);
+      }
+      this.myCal.loadEvents();
+      this.resetEvent();
+    });
+   }  
+   
+   ngOnInit() {
     this.resetEvent();
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Platform, AlertController } from "@ionic/angular";
+import { Platform, AlertController, Events } from "@ionic/angular";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Storage } from "@ionic/storage";
@@ -24,7 +24,12 @@ export class AuthenticationService {
     private helper: JwtHelperService,
     private storage: Storage,
     private plt: Platform,
-    private alertController: AlertController
+    private alertController: AlertController,
+    public events: Events,
+    private toastController: ToastController,
+
+    private router:Router
+
   ) {
     this.plt.ready().then(() => {
       this.checkToken();
@@ -75,6 +80,14 @@ export class AuthenticationService {
         tap(res => {
           this.storage.set(TOKEN_KEY, res["token"]);
           this.user = this.helper.decodeToken(res["token"]);
+          if(this.user["role"] == "Human Resources"){
+            this.events.publish('user:hr');
+          }else if(this.user["role"] == "Consultant"){
+            this.events.publish('user:co');
+          }else if(this.user["role"] == "Manager"){
+            this.events.publish('user:mgr');
+          }
+          this.events.publish('user:loggedin');
           this.authenticationState.next(true);
         }),
         catchError(e => {

@@ -8,12 +8,8 @@
     <ion-content>
       <ion-list>
         <ion-item (click)='goHome()'>Home</ion-item>
-        <ion-item (click)='goProfile()'>Profiel</ion-item>
-        <div *ngIf='showHr'>
-          <ion-item (click)='goConsultants()'>Consultants</ion-item>
-        </div>
-        <div *ngIf="showManager">
-          <ion-item (click)="goProjects()">Projects</ion-item>
+        <div *ngFor="let page of pages">
+          <ion-item (click)='goPage(page.link)'>{{ page.title }}</ion-item>
         </div>
         <ion-item (click)='goSettings()'>Instellingen</ion-item>
         <ion-item (click)='logout()' color='danger'>Afmelden</ion-item>
