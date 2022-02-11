@@ -39,7 +39,7 @@
     "@mobiscroll/angular": "https://npm.mobiscroll.com/@mobiscroll/angular-trial/-/angular-trial-4.6.3.tgz",
     "@types/jquery": "^3.3.29",
     "@types/jqueryui": "^1.12.7",
-    "ajv": "^6.10.0",
+    "ajv": "^6.12.3",
     "angular": "^1.7.7",
     "cordova-android": "7.1.4",
     "cordova-browser": "5.0.4",
